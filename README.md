@@ -1,2 +1,3 @@
-# IEvent
-A mobile project for events
+# ievent
+
+A new Flutter project.
