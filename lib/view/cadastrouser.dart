@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:ievent/view/widgets.dart';
-
 import '../main.dart';
 
 class CadastroUser extends StatelessWidget {
