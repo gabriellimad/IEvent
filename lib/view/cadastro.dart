@@ -17,7 +17,7 @@ class Cadastro extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('images/gradMorpheu.png'),
+                    image: AssetImage('lib/images/logo.jpg'),
                     fit: BoxFit.cover)),
             width: double.infinity,
             height: double.infinity,

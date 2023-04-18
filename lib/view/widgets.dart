@@ -41,7 +41,7 @@ class Widgets extends StatelessWidget {
             Icons.person_rounded,
             color: Colors.black,
           ),
-          hintText: 'Seu E-mail',
+          hintText: 'Usuário',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
         ),
@@ -65,7 +65,7 @@ class Widgets extends StatelessWidget {
             Icons.password_rounded,
             color: Colors.black,
           ),
-          hintText: 'Sua Senha',
+          hintText: 'Senha',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
         ),
@@ -76,7 +76,7 @@ class Widgets extends StatelessWidget {
   widgetEntrar(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black.withOpacity(0),
+        backgroundColor: Color.fromARGB(255, 255, 0, 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         side: BorderSide(color: Colors.black),
       ),
@@ -90,7 +90,10 @@ class Widgets extends StatelessWidget {
         child: Center(
           child: Text(
             'Entrar',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16
+              ),
           ),
         ),
       ),
@@ -122,6 +125,7 @@ class Widgets extends StatelessWidget {
         'Esqueceu a senha?',
         style: TextStyle(
           color: Colors.black,
+          fontWeight: FontWeight.w800
         ),
       ),
     );

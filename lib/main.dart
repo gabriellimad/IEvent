@@ -29,10 +29,7 @@ class TelaPrincipal extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/gradMorpheu.png'),
-                fit: BoxFit.cover,
-              ),
+              color: Color.fromRGBO(0, 0, 0, 0),
             ),
             child: Center(),
           ),
@@ -43,7 +40,7 @@ class TelaPrincipal extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               child: Image.asset(
-                'images/ezprice-removebg-preview.png',
+                'lib/images/logo.jpg',
                 height: 120,
               ),
             ),
@@ -67,36 +64,33 @@ class TelaPrincipal extends StatelessWidget {
                         SizedBox(height: 10),
                         Widgets().widgetSenha(),
                         SizedBox(height: 2),
-                        Row(
-                          children: [Widgets().widgetEsqueceSenha(context)],
-                          mainAxisAlignment: MainAxisAlignment.end,
-                        ),
+                        // Row(
+                        //   children: [Widgets().widgetEsqueceSenha(context)],
+                        //   mainAxisAlignment: MainAxisAlignment.end,
+                        // ),
                         SizedBox(height: 10),
                         Widgets().widgetEntrar(context),
                         SizedBox(height: 25),
-                        Widgets().widgetNovoAqui(context),
+                        Widgets().widgetEsqueceSenha(context),
+                        SizedBox(height: 25),
+                        Widgets().widgetNovoAqui(context)
                       ])),
             ),
           ])
         ],
       ),
       drawer: Drawer(
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/gradMorpheu.png'),
-                  fit: BoxFit.cover)),
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountEmail: Text('lucasvidotto12@gmail.com'),
-                accountName: Text('Lucas Vidotto'),
+                accountEmail: Text('gabriellima@gmail.com'),
+                accountName: Text('Gabriel Lima'),
                 decoration:
                     BoxDecoration(color: Color.fromRGBO(51, 24, 117, 1)),
                 currentAccountPicture: CircleAvatar(
                   child: Text(
-                    'UN',
+                    'Menu',
                     style: TextStyle(color: Colors.black),
                   ),
                   backgroundColor: Color.fromRGBO(51, 24, 117, 0.7),
@@ -105,14 +99,12 @@ class TelaPrincipal extends StatelessWidget {
               ListTile(
                   leading: Icon(Icons.info),
                   title: Text('Sobre nós'),
-                  tileColor: Colors.black,
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Sobrenos()));
                   })
             ],
           ),
-        ),
       ),
     );
   }
