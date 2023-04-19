@@ -37,10 +37,6 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.person_rounded,
-            color: Colors.black,
-          ),
           hintText: 'Usuário',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -61,10 +57,6 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
           hintText: 'Senha',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -85,14 +77,14 @@ class Widgets extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => Cadastro()));
       },
       child: SizedBox(
-        width: 50,
-        height: 30,
+        width: 80,
+        height: 40,
         child: Center(
           child: Text(
             'Entrar',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 16
+              fontSize: 20
               ),
           ),
         ),
@@ -110,6 +102,7 @@ class Widgets extends StatelessWidget {
         'Novo aqui? Cadastre-se',
         style: TextStyle(
           color: Colors.black,
+          fontSize: 16
         ),
       ),
     );
@@ -125,7 +118,8 @@ class Widgets extends StatelessWidget {
         'Esqueceu a senha?',
         style: TextStyle(
           color: Colors.black,
-          fontWeight: FontWeight.w800
+          fontWeight: FontWeight.w800,
+          fontSize: 16
         ),
       ),
     );
@@ -153,10 +147,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
+          
           hintText: 'Insira a nova senha',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -177,10 +168,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
+          
           hintText: 'Qual seu nome?',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -201,10 +189,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
+          
           hintText: 'Insira o email a ser usado',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -225,10 +210,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
+          
           hintText: 'Qual seu CPF?',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -249,10 +231,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
+          
           hintText: 'Confirme sua senha',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
@@ -298,10 +277,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          icon: Icon(
-            Icons.password_rounded,
-            color: Colors.black,
-          ),
+          
           hintText: 'Qual o nome desta receita?',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),

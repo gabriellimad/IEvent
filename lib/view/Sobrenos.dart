@@ -11,10 +11,6 @@ class Sobrenos extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('lib/images/logo.jpg'),
-                    fit: BoxFit.cover)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

@@ -23,8 +23,7 @@ class TelaPrincipal extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(51, 24, 117, 1),
-      ),
+        backgroundColor: Color.fromRGBO(0, 0, 0, 1)),
       body: Stack(
         children: [
           Container(
@@ -47,34 +46,20 @@ class TelaPrincipal extends StatelessWidget {
           ),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 90, vertical: 50),
-              child: Container(
-                  padding: EdgeInsets.fromLTRB(30, 0, 30, 3),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(0, 0, 0, 0.3),
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      border: Border.all(
-                          color: Colors.black.withOpacity(0.4), width: 1.5)),
-                  height: containerHeight,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Widgets().widgetEmail(),
-                        SizedBox(height: 10),
-                        Widgets().widgetSenha(),
-                        SizedBox(height: 2),
-                        // Row(
-                        //   children: [Widgets().widgetEsqueceSenha(context)],
-                        //   mainAxisAlignment: MainAxisAlignment.end,
-                        // ),
-                        SizedBox(height: 10),
-                        Widgets().widgetEntrar(context),
-                        SizedBox(height: 25),
-                        Widgets().widgetEsqueceSenha(context),
-                        SizedBox(height: 25),
-                        Widgets().widgetNovoAqui(context)
-                      ])),
+              padding: EdgeInsets.symmetric(horizontal: 90, vertical: 200),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Widgets().widgetEmail(),
+                    SizedBox(height: 15),
+                    Widgets().widgetSenha(),
+                    SizedBox(height: 20),
+                    Widgets().widgetEntrar(context),
+                    SizedBox(height: 25),
+                    Widgets().widgetEsqueceSenha(context),
+                    SizedBox(height: 10),
+                    Widgets().widgetNovoAqui(context)
+                  ]),
             ),
           ])
         ],
@@ -87,13 +72,13 @@ class TelaPrincipal extends StatelessWidget {
                 accountEmail: Text('gabriellima@gmail.com'),
                 accountName: Text('Gabriel Lima'),
                 decoration:
-                    BoxDecoration(color: Color.fromRGBO(51, 24, 117, 1)),
+                    BoxDecoration(color: Color.fromRGBO(0, 0, 0, 1)),
                 currentAccountPicture: CircleAvatar(
                   child: Text(
                     'Menu',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   ),
-                  backgroundColor: Color.fromRGBO(51, 24, 117, 0.7),
+                  backgroundColor: Color.fromRGBO(0, 0, 0, 1),
                 ),
               ),
               ListTile(

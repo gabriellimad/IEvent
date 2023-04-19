@@ -13,10 +13,6 @@ class CadastroUser extends StatelessWidget {
     return Scaffold(
         body: Stack(children: [
       Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('lib/images/logo.jpg'),
-                fit: BoxFit.cover)),
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.center,
