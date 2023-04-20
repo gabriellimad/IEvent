@@ -68,7 +68,6 @@ class Widgets extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Color.fromARGB(255, 255, 0, 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        side: BorderSide(color: Colors.black),
       ),
       onPressed: () {
         Navigator.push(
@@ -81,7 +80,7 @@ class Widgets extends StatelessWidget {
           child: Text(
             'Entrar',
             style: TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 255, 255),
               fontSize: 20
               ),
           ),

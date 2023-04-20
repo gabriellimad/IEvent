@@ -1,5 +1,5 @@
 class Evento {
-  final String Nome;
-  final String Preco;
-  Evento(this.Nome, this.Preco);
+  final String Endereco;
+  final String Data;
+  Evento(this.Endereco, this.Data);
 }

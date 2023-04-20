@@ -18,22 +18,23 @@ class _CadastroState extends State<Cadastro> {
   //Atributos
   List<Evento> lista = [];
   var index;
-  var txtNome = TextEditingController();
   var txtEndereco = TextEditingController();
   var txtData = TextEditingController();
 
   @override
   void initState() {
     index = -1;
-    lista.add(Evento('Rodeio', '120,00'));
-    lista.add(Evento('Teatro', '50,00'));
+    lista.add(Evento('Rua Marechal Deodoro', '18/04/2024'));
+    lista.add(Evento('Rua Andrades da Silva', '18/05/2024'));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cadastro de Eventos')),
+      appBar: AppBar(title: Text('Cadastro de Eventos'),
+      backgroundColor: Color.fromRGBO(0, 0, 0, 1)
+      ),
       body: Column(
         children: [
           Expanded(
@@ -65,9 +66,9 @@ class _CadastroState extends State<Cadastro> {
           children: [
             //CAMPO DE TEXTO
             TextField(
-              controller: txtNome,
+              controller: txtEndereco,
               decoration: InputDecoration(
-                labelText: 'Nome do evento',
+                labelText: 'Endereco do evento',
                 labelStyle: TextStyle(fontSize: 18),
                 prefixIcon: Icon(Icons.local_activity),
                 border: OutlineInputBorder(),
@@ -86,44 +87,35 @@ class _CadastroState extends State<Cadastro> {
                 border: OutlineInputBorder(),
               ),
             ),
-            
-            SizedBox(height: 10),
-
-                      TextField(
-              controller: txtEndereco,
-              decoration: InputDecoration(
-                labelText: 'Endereço',
-                labelStyle: TextStyle(fontSize: 18),
-                prefixIcon: Icon(Icons.maps_home_work_rounded),
-                border: OutlineInputBorder(),
-              ),
-            ),
 
             SizedBox(height: 25),
 
             //BOTÃO> ElevatedButton; OutlinedButton; TextButton
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 255, 0, 0),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              ),
               //Evento
               onPressed: () {
-                if (txtNome.text.isNotEmpty && txtEndereco.text.isNotEmpty) {
+                if (txtEndereco.text.isNotEmpty && txtData.text.isNotEmpty) {
                   if (index == -1) {
                     //Adicionar um novo Evento
                     setState(() {
                       lista.add(
-                        Evento(txtNome.text, txtEndereco.text),
+                        Evento(txtEndereco.text, txtData.text),
                       );
                     });
                     mensagem('Evento adicionado com sucesso!');
                   } else {
                     //Atualizar um Evento existe
                     setState(() {
-                      lista[index] = Evento(txtNome.text, txtEndereco.text);
+                      lista[index] = Evento(txtEndereco.text, txtData.text);
                       index = -1;
                     });
                     mensagem('Evento atualizado com sucesso!');
                   }
 
-                  txtNome.clear();
                   txtEndereco.clear();
                   txtData.clear();
                 } else {
@@ -133,7 +125,11 @@ class _CadastroState extends State<Cadastro> {
                 }
               },
               //Conteúdo
-              child: Text('salvar'),
+              child: Text('Salvar', style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 20
+                ),
+              ),
             ),
           ],
         ),
@@ -156,8 +152,8 @@ class _CadastroState extends State<Cadastro> {
           return Card(
             child: ListTile(
               leading: Icon(Icons.event),
-              title: Text(lista[index].Nome),
-              subtitle: Text(lista[index].Preco),
+              title: Text(lista[index].Endereco),
+              subtitle: Text(lista[index].Data),
               trailing: IconButton(
                 icon: Icon(Icons.delete_outline),
                 onPressed: () {
@@ -173,8 +169,8 @@ class _CadastroState extends State<Cadastro> {
                 setState(() {
                   //Armazenar a posição da lista
                   this.index = index;
-                  txtNome.text = lista[index].Nome;
-                  txtEndereco.text = lista[index].Preco;
+                  txtEndereco.text = lista[index].Endereco;
+                  txtData.text = lista[index].Data;
                 });
               },
               //Alterar a cor do ITEM selecionado
@@ -184,8 +180,8 @@ class _CadastroState extends State<Cadastro> {
               onLongPress: () {
                 setState(() {
                   this.index = -1;
-                  txtNome.clear();
                   txtEndereco.clear();
+                  txtData.clear();
                 });
               },
             ),
