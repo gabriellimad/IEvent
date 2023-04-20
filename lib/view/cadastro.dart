@@ -18,14 +18,14 @@ class _CadastroState extends State<Cadastro> {
   //Atributos
   List<Evento> lista = [];
   var index;
-  var txtEndereco = TextEditingController();
+  var txtNome = TextEditingController();
   var txtData = TextEditingController();
 
   @override
   void initState() {
     index = -1;
-    lista.add(Evento('Rua Marechal Deodoro', '18/04/2024'));
-    lista.add(Evento('Rua Andrades da Silva', '18/05/2024'));
+    lista.add(Evento('Rodeio', '18/04/2024'));
+    lista.add(Evento('Teatro', '18/05/2024'));
     super.initState();
   }
 
@@ -66,9 +66,9 @@ class _CadastroState extends State<Cadastro> {
           children: [
             //CAMPO DE TEXTO
             TextField(
-              controller: txtEndereco,
+              controller: txtNome,
               decoration: InputDecoration(
-                labelText: 'Endereco do evento',
+                labelText: 'Nome do Evento',
                 labelStyle: TextStyle(fontSize: 18),
                 prefixIcon: Icon(Icons.local_activity),
                 border: OutlineInputBorder(),
@@ -98,25 +98,25 @@ class _CadastroState extends State<Cadastro> {
               ),
               //Evento
               onPressed: () {
-                if (txtEndereco.text.isNotEmpty && txtData.text.isNotEmpty) {
+                if (txtNome.text.isNotEmpty && txtData.text.isNotEmpty) {
                   if (index == -1) {
                     //Adicionar um novo Evento
                     setState(() {
                       lista.add(
-                        Evento(txtEndereco.text, txtData.text),
+                        Evento(txtNome.text, txtData.text),
                       );
                     });
                     mensagem('Evento adicionado com sucesso!');
                   } else {
                     //Atualizar um Evento existe
                     setState(() {
-                      lista[index] = Evento(txtEndereco.text, txtData.text);
+                      lista[index] = Evento(txtNome.text, txtData.text);
                       index = -1;
                     });
                     mensagem('Evento atualizado com sucesso!');
                   }
 
-                  txtEndereco.clear();
+                  txtNome.clear();
                   txtData.clear();
                 } else {
                   mensagem(
@@ -169,7 +169,7 @@ class _CadastroState extends State<Cadastro> {
                 setState(() {
                   //Armazenar a posição da lista
                   this.index = index;
-                  txtEndereco.text = lista[index].Endereco;
+                  txtNome.text = lista[index].Endereco;
                   txtData.text = lista[index].Data;
                 });
               },
@@ -180,7 +180,7 @@ class _CadastroState extends State<Cadastro> {
               onLongPress: () {
                 setState(() {
                   this.index = -1;
-                  txtEndereco.clear();
+                  txtNome.clear();
                   txtData.clear();
                 });
               },

@@ -35,7 +35,7 @@ class Sobrenos extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: SingleChildScrollView(
                   child: Text(
-                    ' \t\t Este App está sendo desenvolvido na matéria de dispositivos móveis em Flutter, na FATEC-RP! \n\t\t ',
+                    ' \t\t Este App está sendo desenvolvido na matéria de dispositivos móveis em Flutter, na FATEC-RP! \n Nosso aplicativo permite que você cadastre eventos e encontre facilmente eventos próximos a você. Com nossa plataforma, você terá acesso a uma lista de eventos\t\t ',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 1),
