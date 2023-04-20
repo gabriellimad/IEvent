@@ -35,7 +35,7 @@ class Widgets extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: 'Usuário',
+          hintText: 'Email',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
         ),

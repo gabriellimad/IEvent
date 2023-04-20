@@ -40,6 +40,8 @@ class EsqueceSenha extends StatelessWidget {
                     child: Form(
                         key: formKey,
                         child: Column(children: [
+                          Widgets().widgetEmail(),
+                          SizedBox(height: 10),
                           Widgets().widgetNovaSenha(),
                           SizedBox(height: 10),
                           Widgets().widgetConfirmaSenha(),
