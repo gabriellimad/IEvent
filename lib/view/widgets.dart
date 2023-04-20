@@ -20,6 +20,7 @@ class Widgets extends StatelessWidget {
         widgetEntrar(context),
         widgetEsqueceSenha(context),
         widgetNovaSenha(),
+        widgetConcluirCadastro(context),
       ],
     );
   }
@@ -79,6 +80,32 @@ class Widgets extends StatelessWidget {
         child: Center(
           child: Text(
             'Entrar',
+            style: TextStyle(
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontSize: 20
+              ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  widgetConcluirCadastro(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 255, 0, 0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Cadastro()));
+      },
+      child: SizedBox(
+        width: 100,
+        height: 40,
+        child: Center(
+          child: Text(
+            'Cadastrar',
             style: TextStyle(
               color: Color.fromARGB(255, 255, 255, 255),
               fontSize: 20

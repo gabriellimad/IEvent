@@ -46,7 +46,9 @@ class CadastroUser extends StatelessWidget {
                         SizedBox(height: 3),
                         Widgets().widgetSenha(),
                         SizedBox(height: 3),
-                        Widgets().widgetConfirmaSenha()
+                        Widgets().widgetConfirmaSenha(),
+                        SizedBox(height: 15),
+                        Widgets().widgetConcluirCadastro(context)
                       ]))),
             ),
             Positioned(
