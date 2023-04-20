@@ -178,7 +178,6 @@ class Widgets extends StatelessWidget {
           border: Border.all(color: Colors.black)),
       child: TextField(
         style: TextStyle(color: Colors.black),
-        obscureText: true,
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -199,7 +198,6 @@ class Widgets extends StatelessWidget {
           border: Border.all(color: Colors.black)),
       child: TextField(
         style: TextStyle(color: Colors.black),
-        obscureText: true,
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -220,7 +218,6 @@ class Widgets extends StatelessWidget {
           border: Border.all(color: Colors.black)),
       child: TextField(
         style: TextStyle(color: Colors.black),
-        obscureText: true,
         autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
