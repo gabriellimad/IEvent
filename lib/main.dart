@@ -39,7 +39,7 @@ class TelaPrincipal extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               child: Image.asset(
-                'lib/images/logo.jpg',
+                "lib/images/logo.jpeg",
                 height: 120,
               ),
             ),
