@@ -6,7 +6,7 @@ import '../main.dart';
 
 class CadastroUser extends StatelessWidget {
   const CadastroUser({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -25,7 +25,7 @@ class CadastroUser extends StatelessWidget {
                 child: Text(
                   'Cadastro de Usuário',
                   style: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.9),
+                    color: Color.fromRGBO(0, 0, 0, 30),
                     fontSize: 30,
                   ),
                 ),

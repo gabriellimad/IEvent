@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import '../model/Evento.dart';
+import '../model/evento.dart';
+
+
 
 //STATEFUL stf+TAB
 class Cadastro extends StatefulWidget {
@@ -17,7 +19,8 @@ class _CadastroState extends State<Cadastro> {
   List<Evento> lista = [];
   var index;
   var txtNome = TextEditingController();
-  var txtPreco = TextEditingController();
+  var txtEndereco = TextEditingController();
+  var txtData = TextEditingController();
 
   @override
   void initState() {
@@ -57,58 +60,75 @@ class _CadastroState extends State<Cadastro> {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(20),
-        color: Colors.blueGrey.shade50,
+        color: Color.fromARGB(255, 255, 255, 255),
         child: Column(
           children: [
             //CAMPO DE TEXTO
             TextField(
               controller: txtNome,
               decoration: InputDecoration(
-                labelText: 'Nome',
+                labelText: 'Nome do evento',
                 labelStyle: TextStyle(fontSize: 18),
-                prefixIcon: Icon(Icons.person),
+                prefixIcon: Icon(Icons.local_activity),
                 border: OutlineInputBorder(),
               ),
             ),
+
             SizedBox(height: 10),
+
             //CAMPO DE TEXTO
             TextField(
-              controller: txtPreco,
+              controller: txtData,
               decoration: InputDecoration(
-                labelText: 'Preço',
+                labelText: 'Data',
                 labelStyle: TextStyle(fontSize: 18),
-                prefixIcon: Icon(Icons.smartphone),
+                prefixIcon: Icon(Icons.event),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 15),
+            
+            SizedBox(height: 10),
+
+                      TextField(
+              controller: txtEndereco,
+              decoration: InputDecoration(
+                labelText: 'Endereço',
+                labelStyle: TextStyle(fontSize: 18),
+                prefixIcon: Icon(Icons.maps_home_work_rounded),
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            SizedBox(height: 25),
+
             //BOTÃO> ElevatedButton; OutlinedButton; TextButton
             ElevatedButton(
               //Evento
               onPressed: () {
-                if (txtNome.text.isNotEmpty && txtPreco.text.isNotEmpty) {
+                if (txtNome.text.isNotEmpty && txtEndereco.text.isNotEmpty) {
                   if (index == -1) {
                     //Adicionar um novo Evento
                     setState(() {
                       lista.add(
-                        Evento(txtNome.text, txtPreco.text),
+                        Evento(txtNome.text, txtEndereco.text),
                       );
                     });
                     mensagem('Evento adicionado com sucesso!');
                   } else {
                     //Atualizar um Evento existe
                     setState(() {
-                      lista[index] = Evento(txtNome.text, txtPreco.text);
+                      lista[index] = Evento(txtNome.text, txtEndereco.text);
                       index = -1;
                     });
                     mensagem('Evento atualizado com sucesso!');
                   }
 
                   txtNome.clear();
-                  txtPreco.clear();
+                  txtEndereco.clear();
+                  txtData.clear();
                 } else {
                   mensagem(
-                    'Os campos nome e preço precisam ser preenchidos.',
+                    'Os campos do evento precisam ser preenchidos.',
                   );
                 }
               },
@@ -154,18 +174,18 @@ class _CadastroState extends State<Cadastro> {
                   //Armazenar a posição da lista
                   this.index = index;
                   txtNome.text = lista[index].Nome;
-                  txtPreco.text = lista[index].Preco;
+                  txtEndereco.text = lista[index].Preco;
                 });
               },
               //Alterar a cor do ITEM selecionado
               tileColor: (this.index == index)
-                  ? Colors.amberAccent.shade100
+                  ? Color.fromARGB(255, 107, 188, 255)
                   : Colors.white,
               onLongPress: () {
                 setState(() {
                   this.index = -1;
                   txtNome.clear();
-                  txtPreco.clear();
+                  txtEndereco.clear();
                 });
               },
             ),
