@@ -16,12 +16,10 @@ class Widgets extends StatelessWidget {
       children: [
         widgetEmail(),
         widgetSenha(),
-//        widgetSobreNos(context),
         widgetConfirmaSenha(),
         widgetEntrar(context),
         widgetEsqueceSenha(context),
         widgetNovaSenha(),
-        widgetNomeReceita(),
       ],
     );
   }
@@ -125,16 +123,6 @@ class Widgets extends StatelessWidget {
     );
   }
 
-//  widgetSobreNos(BuildContext context) {
-//    return InkWell(
-//      onTap: () {
-//        Navigator.push(
-//            context, MaterialPageRoute(builder: (context) => Sobrenos()));
-//      },
-//      child: Icon(Icons.info, color: Colors.black),
-//    );
-//  }
-
   widgetNovaSenha() {
     return Container(
       padding: const EdgeInsets.fromLTRB(15, 3, 15, 3),
@@ -233,115 +221,6 @@ class Widgets extends StatelessWidget {
           border: InputBorder.none,
           
           hintText: 'Confirme sua senha',
-          hintStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
-        ),
-      ),
-    );
-  }
-
-//    widgetReivindicar() {
-//    return Container(
-//      padding:  const EdgeInsets.fromLTRB(15, 3, 15, 3),
-//      decoration: BoxDecoration(
-//          borderRadius: BorderRadius.circular(30),
-//          border: Border.all(color: Colors.black)),
-//      child: TextField(
-//        style: TextStyle(color: Colors.black),
-//        obscureText: true,
-//        autofocus: true,
-//        decoration: InputDecoration(
-//          border: InputBorder.none,
-//          icon: Icon(
-//            Icons.password_rounded,
-//            color: Colors.black,
-//          ),
-//          hintText: 'Confirme sua senha',
-//          hintStyle: TextStyle(
-//              color: Colors.black,
-//              fontWeight: FontWeight.bold,
-//              fontSize: 15),
-//        ),
-//      ),
-//    );
-//  }
-
-  widgetNomeReceita() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 3, 15, 3),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.black)),
-      child: TextField(
-        style: TextStyle(color: Colors.black),
-        autofocus: true,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          
-          hintText: 'Qual o nome desta receita?',
-          hintStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
-        ),
-      ),
-    );
-  }
-
-  widgetMateriais() {
-    return Container(
-      height: 40,
-      width: 200,
-      padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.black)),
-      child: TextField(
-        style: TextStyle(color: Colors.black),
-        autofocus: true,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Insira o material',
-          hintStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
-        ),
-      ),
-    );
-  }
-
-  widgetPrecoCadastro() {
-    return Container(
-      height: 40,
-      width: 100,
-      padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.black)),
-      child: TextField(
-        style: TextStyle(color: Colors.black),
-        autofocus: true,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Preço R\$',
-          hintStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
-        ),
-      ),
-    );
-  }
-
-  widgetQuantidade() {
-    return Container(
-      height: 40,
-      width: 100,
-      padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.black)),
-      child: TextField(
-        style: TextStyle(color: Colors.black),
-        autofocus: true,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Quant Kg',
           hintStyle: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
         ),

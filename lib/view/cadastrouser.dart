@@ -37,7 +37,6 @@ class CadastroUser extends StatelessWidget {
                   child: Form(
                       key: formKey,
                       child: Column(children: [
-                        Widgets().widgetNomeReceita(),
                         SizedBox(height: 3),
                         Widgets().widgetNomeUser(),
                         SizedBox(height: 3),
