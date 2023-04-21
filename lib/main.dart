@@ -3,13 +3,29 @@
 import 'package:flutter/material.dart';
 import 'package:ievent/view/Sobrenos.dart';
 import 'package:ievent/view/widgets.dart';
+import 'package:device_preview/device_preview.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'tela principal',
-    home: TelaPrincipal(),
-  ));
+void main() => runApp(
+  DevicePreview(
+    enabled: true,
+    builder: (context) => MyApp(), // Wrap your app
+  ),
+);
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      useInheritedMediaQuery: true,
+      debugShowCheckedModeBanner: false,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      title: 'Tela Principal',
+      home: TelaPrincipal(),
+    );
+  }
 }
 
 class TelaPrincipal extends StatelessWidget {
@@ -19,7 +35,7 @@ class TelaPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final containerHeight =
-        screenHeight * 0.7 - 120; // subtrai a altura da imagem do EzPrice
+        screenHeight * 0.7 - 120;
 
     return Scaffold(
       appBar: AppBar(
@@ -44,6 +60,7 @@ class TelaPrincipal extends StatelessWidget {
               ),
             ),
           ),
+
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 90, vertical: 200),
@@ -64,6 +81,7 @@ class TelaPrincipal extends StatelessWidget {
           ])
         ],
       ),
+
       drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -81,6 +99,7 @@ class TelaPrincipal extends StatelessWidget {
                   backgroundColor: Color.fromRGBO(0, 0, 0, 1),
                 ),
               ),
+
               ListTile(
                   leading: Icon(Icons.info),
                   title: Text('Sobre nós'),
