@@ -44,40 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDYSdARZgm27tmgSjJMS3amiE7sGnM-_yg',
-    appId: '1:612562021338:web:34bbe019523d8e5736aee3',
-    messagingSenderId: '612562021338',
-    projectId: 'projeto-ievent',
-    authDomain: 'projeto-ievent.firebaseapp.com',
-    storageBucket: 'projeto-ievent.appspot.com',
-    measurementId: 'G-NLN4RM4FW7',
+    apiKey: 'AIzaSyDExsiCva-bM3Mm17yByrd9hGqadhYW84w',
+    appId: '1:805647857934:web:0f141efa3a168f2ff4ff5f',
+    messagingSenderId: '805647857934',
+    projectId: 'appievent',
+    authDomain: 'appievent.firebaseapp.com',
+    storageBucket: 'appievent.appspot.com',
+    measurementId: 'G-KHJ2QW93WG',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB9eAUmRl2YTwxEPjez3jkiLTL1lGFnv18',
-    appId: '1:612562021338:android:c0f50eecc4cd2a8436aee3',
-    messagingSenderId: '612562021338',
-    projectId: 'projeto-ievent',
-    storageBucket: 'projeto-ievent.appspot.com',
+    apiKey: 'AIzaSyCPpsbHqVJSiEm68YnXIPIVPviBN8wk2Jo',
+    appId: '1:805647857934:android:480bf6a525fba182f4ff5f',
+    messagingSenderId: '805647857934',
+    projectId: 'appievent',
+    storageBucket: 'appievent.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAI9jMZS5Poe6rGDXvEtu4QXZQl47n7pMQ',
-    appId: '1:612562021338:ios:9e6821211527a94036aee3',
-    messagingSenderId: '612562021338',
-    projectId: 'projeto-ievent',
-    storageBucket: 'projeto-ievent.appspot.com',
-    iosClientId: '612562021338-nblm225uf0jlcstb4eq0ceabfn5d25ht.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDhfawyayhFFLppplMUp8JG2M24Z0F89q0',
+    appId: '1:805647857934:ios:0b8a431634796662f4ff5f',
+    messagingSenderId: '805647857934',
+    projectId: 'appievent',
+    storageBucket: 'appievent.appspot.com',
     iosBundleId: 'com.example.ievent',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAI9jMZS5Poe6rGDXvEtu4QXZQl47n7pMQ',
-    appId: '1:612562021338:ios:9e6821211527a94036aee3',
-    messagingSenderId: '612562021338',
-    projectId: 'projeto-ievent',
-    storageBucket: 'projeto-ievent.appspot.com',
-    iosClientId: '612562021338-nblm225uf0jlcstb4eq0ceabfn5d25ht.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDhfawyayhFFLppplMUp8JG2M24Z0F89q0',
+    appId: '1:805647857934:ios:0b8a431634796662f4ff5f',
+    messagingSenderId: '805647857934',
+    projectId: 'appievent',
+    storageBucket: 'appievent.appspot.com',
     iosBundleId: 'com.example.ievent',
   );
 }

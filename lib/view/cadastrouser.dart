@@ -1,74 +1,92 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:ievent/view/widgets.dart';
-import '../main.dart';
 
-class CadastroUser extends StatelessWidget {
-  const CadastroUser({Key? key}) : super(key: key);
-  
+import '../controller/login_controller.dart';
+
+class CadastrarView extends StatefulWidget {
+  const CadastrarView({super.key});
+
+  @override
+  State<CadastrarView> createState() => _CadastrarViewState();
+}
+
+class _CadastrarViewState extends State<CadastrarView> {
+  var txtNome = TextEditingController();
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
-        body: Stack(children: [
-      Container(
-        width: double.infinity,
-        height: double.infinity,
-        alignment: Alignment.center,
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(30, 50, 30, 50),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
-              child: const Center(
-                child: Text(
-                  'Cadastro de Usuário',
-                  style: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 30),
-                    fontSize: 30,
+            Text(
+              'Criar Conta',
+              style: TextStyle(fontSize: 60),
+            ),
+            SizedBox(height: 60),
+            TextField(
+              controller: txtNome,
+              decoration: InputDecoration(
+                  labelText: 'Nome',
+                  prefixIcon: Icon(Icons.person),
+                  border: OutlineInputBorder()),
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: txtEmail,
+              decoration: InputDecoration(
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.email),
+                  border: OutlineInputBorder()),
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: txtSenha,
+              obscureText: true,
+              decoration: InputDecoration(
+                  labelText: 'Senha',
+                  prefixIcon: Icon(Icons.password),
+                  border: OutlineInputBorder()),
+            ),
+            SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('cancelar'),
+                ),
+                ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: Size(140, 40),
                   ),
+                  onPressed: () {
+                    LoginController().criarConta(
+                      context,
+                      txtNome.text,
+                      txtEmail.text,
+                      txtSenha.text,
+                    );
+                  },
+                  child: Text('salvar'),
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-                  child: Form(
-                      key: formKey,
-                      child: Column(children: [
-                        SizedBox(height: 3),
-                        Widgets().widgetNomeUser(),
-                        SizedBox(height: 3),
-                        Widgets().widgetEmailUser(),
-                        SizedBox(height: 3),
-                        Widgets().widgetCPF(),
-                        SizedBox(height: 3),
-                        Widgets().widgetSenha(),
-                        SizedBox(height: 3),
-                        Widgets().widgetConfirmaSenha(),
-                        SizedBox(height: 15),
-                        Widgets().widgetConcluirCadastro(context)
-                      ]))),
-            ),
-            Positioned(
-              bottom: 16,
-              right: 16,
-              child: FloatingActionButton(
-                backgroundColor: Color.fromRGBO(13, 12, 12, 0.9),
-                onPressed: () {
-                  Navigator.pop(context,
-                      MaterialPageRoute(builder: (context) => TelaPrincipal()));
-                },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Color.fromRGBO(0, 0, 0, 0.9),
-                ),
-              ),
-            ),
+            SizedBox(height: 40),
           ],
         ),
-      )
-    ]));
+      ),
+    );
   }
 }
