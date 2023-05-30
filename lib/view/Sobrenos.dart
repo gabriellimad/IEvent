@@ -1,13 +1,19 @@
-// ignore_for_file: prefer_const_constructors, file_names
-
 import 'package:flutter/material.dart';
+
+import 'detalhes_autor.dart';
 
 class Sobrenos extends StatelessWidget {
   const Sobrenos({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -30,6 +36,29 @@ class Sobrenos extends StatelessWidget {
                 ),
               ),
             ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetalhesAutor(
+                      nome: 'João',
+                      idade: 25,
+                      email: 'joao@example.com',
+                      numero: '123456789',
+                      areaProfissional: 'Desenvolvimento',
+                      faculdade: 'FATEC',
+                      professor: 'Professor X',
+                      imageUrl: 'lib/images/foto_perfil.jpg',
+                    ),
+                  ),
+                );
+              },
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('lib/images/foto_perfil.jpg'),
+              ),
+            ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(16),
@@ -42,18 +71,6 @@ class Sobrenos extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 16,
-              right: 16,
-              child: FloatingActionButton(
-                backgroundColor: Color.fromRGBO(13, 12, 12, 0.9),
-                onPressed: () => Navigator.pop(context),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Color.fromRGBO(0, 0, 0, 1),
                 ),
               ),
             ),
