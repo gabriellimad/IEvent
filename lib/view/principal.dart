@@ -1,185 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ievent/view/perfil.dart';
 import '../controller/login_controller.dart';
-import '../controller/tarefa_controller.dart';
-import '../model/tarefa.dart';
+import 'filtros.dart';
 
-class PrincipalView extends StatefulWidget {
+class PrincipalView extends StatelessWidget {
   const PrincipalView({Key? key}) : super(key: key);
-
-  @override
-  State<PrincipalView> createState() => _PrincipalViewState();
-}
-
-class _PrincipalViewState extends State<PrincipalView> {
-  var txtTitulo = TextEditingController();
-  var txtDescricao = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 103, 103, 255),
         title: Text('Eventos'),
         actions: [
-          IconButton(
-            onPressed: () {
-              LoginController().logout();
-              Navigator.pushReplacementNamed(context, 'login');
-            },
-            icon: Icon(Icons.exit_to_app),
-          ),
-          FutureBuilder<String>(
-            future: LoginController().usuarioLogado(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PerfilUsuarioScreen(
-                          perfilUsuario: PerfilUsuario(
-                            nome: snapshot.data.toString(),
-                            email: '', // Insira o email do usuário aqui
-                            fotoPerfilUrl: '', // Insira a URL da foto de perfil do usuário aqui
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  child: CircleAvatar(
-                    radius: 16,
-                    backgroundImage: NetworkImage(
-                      '', // Insira a URL da foto de perfil do usuário aqui
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PerfilUsuarioScreen(
+                    perfilUsuario: PerfilUsuario(
+                      nome: '', // Insira o nome do usuário aqui
+                      email: '', // Insira o email do usuário aqui
+                      fotoPerfilUrl: '', // Insira a URL da foto de perfil do usuário aqui
                     ),
                   ),
-                );
-              }
-              return Container();
+                ),
+              );
             },
+            child: Container(
+              margin: EdgeInsets.only(right: 16),
+              child: CircleAvatar(
+                radius: 16,
+                backgroundImage: NetworkImage(
+                  '', // Insira a URL da foto de perfil do usuário aqui
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Filtros()),
+              );
+            },
+            icon: Icon(Icons.filter_list),
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: StreamBuilder<QuerySnapshot>(
-          stream: TarefaController().listar().snapshots(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return Center(
-                  child: Text('Não foi possível conectar.'),
-                );
-              case ConnectionState.waiting:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              default:
-                final dados = snapshot.requireData;
-                if (dados.size > 0) {
-                  return ListView.builder(
-                    itemCount: dados.size,
-                    itemBuilder: (context, index) {
-                      String id = dados.docs[index].id;
-                      dynamic item = dados.docs[index].data();
-                      return Card(
-                        child: ListTile(
-                          leading: Icon(Icons.description),
-                          title: Text(item['titulo']),
-                          subtitle: Text(item['descricao']),
-                          onTap: () {
-                            txtTitulo.text = item['titulo'];
-                            txtDescricao.text = item['descricao'];
-                            salvarTarefa(context, docId: id);
-                          },
-                          onLongPress: () {
-                            TarefaController().excluir(context, id);
-                          },
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return Center(
-                    child: Text('Nenhum evento encontrado.'),
-                  );
-                }
-            }
-          },
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/images/mapa.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          salvarTarefa(context);
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Criar evento"),
+                content: SizedBox(
+                  height: 250,
+                  width: 300,
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Evento',
+                          prefixIcon: Icon(Icons.description),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      TextField(
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          labelText: 'Descrição',
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                actions: [
+                  TextButton(
+                    child: Text("fechar"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text("salvar"),
+                    onPressed: () {
+                      // Lógica para salvar o evento
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
         },
         child: Icon(Icons.add),
       ),
-    );
-  }
-
-  void salvarTarefa(context, {docId}) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Criar evento"),
-          content: SizedBox(
-            height: 250,
-            width: 300,
-            child: Column(
-              children: [
-                TextField(
-                  controller: txtTitulo,
-                  decoration: InputDecoration(
-                    labelText: 'Evento',
-                    prefixIcon: Icon(Icons.description),
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 15),
-                TextField(
-                  controller: txtDescricao,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    labelText: 'Descrição',
-                    alignLabelWithHint: true,
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-          actions: [
-            TextButton(
-              child: Text("fechar"),
-              onPressed: () {
-                txtTitulo.clear();
-                txtDescricao.clear();
-                Navigator.of(context).pop();
-              },
-            ),
-            ElevatedButton(
-              child: Text("salvar"),
-              onPressed: () {
-                var t = Tarefa(
-                  LoginController().idUsuario(),
-                  txtTitulo.text,
-                  txtDescricao.text,
-                );
-                txtTitulo.clear();
-                txtDescricao.clear();
-                if (docId == null) {
-                  TarefaController().adicionar(context, t);
-                } else {
-                  TarefaController().atualizar(context, docId, t);
-                }
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }

@@ -23,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 103, 103, 255),
         leading: IconButton(
           icon: Icon(Icons.info),
           onPressed: () {
@@ -39,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage('caminho/para/a/imagem.png'),
+              backgroundImage: AssetImage('lib/images/logo.jpg'),
             ),
             SizedBox(height: 60),
             Text(
