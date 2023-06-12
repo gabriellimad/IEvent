@@ -26,4 +26,5 @@ flutter:
   assets:
     - lib/images/logo.jpg
     - lib/images/mapa.jpg
+    - lib/images/perfilgiovana.jpg
 

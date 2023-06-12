@@ -34,16 +34,7 @@ class PerfilUsuarioScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text('Nome: ${perfilUsuario.nome}'),
-            Text('E-mail: ${perfilUsuario.email}'),
             SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Ação do botão de sair
-                // Realizar o logout do usuário e voltar para a tela de login
-                Navigator.pushReplacementNamed(context, 'login');
-              },
-              child: Text('Sair da conta'),
-            ),
           ],
         ),
       ),

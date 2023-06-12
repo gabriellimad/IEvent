@@ -36,28 +36,83 @@ class Sobrenos extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetalhesAutor(
-                      nome: 'João',
-                      idade: 25,
-                      email: 'joao@example.com',
-                      numero: '123456789',
-                      areaProfissional: 'Desenvolvimento',
-                      faculdade: 'FATEC',
-                      professor: 'Professor X',
-                      imageUrl: 'lib/images/foto_perfil.jpg',
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetalhesAutor(
+                          nome: 'Giovana Rozolin',
+                          idade: 21,
+                          email: 'giovanarozolin@gmail.com',
+                          numero: '(16) 981878505',
+                          areaProfissional: 'Dev estagiária',
+                          faculdade: 'FATEC',
+                          professor: 'Rodrigo Plotze',
+                          imageUrl: 'lib/images/perfilgiovana.jpg',
+                        ),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('lib/images/perfilgiovana.jpg'),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Giovana',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('lib/images/foto_perfil.jpg'),
-              ),
+                ),
+                SizedBox(width: 16), // Espaço entre os dois ícones
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetalhesAutor(
+                          nome: 'Maria',
+                          idade: 30,
+                          email: 'maria@example.com',
+                          numero: '987654321',
+                          areaProfissional: 'Design',
+                          faculdade: 'Universidade XYZ',
+                          professor: 'Professor Y',
+                          imageUrl: 'lib/images/foto_perfil_2.jpg',
+                        ),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('lib/images/foto_perfil_2.jpg'),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Gabriel',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Expanded(
               child: Container(
