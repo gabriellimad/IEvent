@@ -44,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             SizedBox(height: 60),
             Text(
-              'Login',
+              'iEvent',
               style: TextStyle(fontSize: 60),
             ),
             SizedBox(height: 20),
