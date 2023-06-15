@@ -27,7 +27,7 @@ class _PrincipalViewState extends State<PrincipalView> {
         backgroundColor: Color.fromARGB(255, 103, 103, 255),
         title: Row(
           children: [
-            Expanded(child: Text('Eventos Publicos')),
+            Expanded(child: Text('Eventos Públicos')),
             FutureBuilder<String>(
               future: LoginController().usuarioLogado(),
               builder: (context, snapshot) {
