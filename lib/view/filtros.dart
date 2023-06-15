@@ -106,6 +106,7 @@ class _FiltrosState extends State<Filtros> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Lógica para aplicar os filtros
+          Navigator.pop(context); // Retorna à tela anterior (TelaMapa)
         },
         label: Text('Aplicar Filtros'),
         icon: Icon(Icons.filter_list),

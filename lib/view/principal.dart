@@ -1,14 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/model/evento.dart';
+import 'package:ievent/view/perfil.dart';
 
 import '../controller/evento_controller.dart';
 import '../controller/login_controller.dart';
+import 'maps.dart';
 
 class PrincipalView extends StatefulWidget {
-  const PrincipalView({super.key});
+  const PrincipalView({Key? key}) : super(key: key);
 
   @override
   State<PrincipalView> createState() => _PrincipalViewState();
@@ -39,10 +39,20 @@ class _PrincipalViewState extends State<PrincipalView> {
                         textStyle: TextStyle(fontSize: 12),
                       ),
                       onPressed: () {
-                        LoginController().logout();
-                        Navigator.pushReplacementNamed(context, 'login');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PerfilUsuarioScreen(
+                              perfilUsuario: PerfilUsuario(
+                                nome: snapshot.data.toString(),
+                                email: '', // Adicione o email do usuário aqui
+                                fotoPerfilUrl: '', // Adicione a URL da foto de perfil do usuário aqui
+                              ),
+                            ),
+                          ),
+                        );
                       },
-                      icon: Icon(Icons.exit_to_app, size: 14),
+                      icon: Icon(Icons.person, size: 14),
                       label: Text(snapshot.data.toString()),
                     ),
                   );
@@ -50,11 +60,19 @@ class _PrincipalViewState extends State<PrincipalView> {
                 return Text('');
               },
             ),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TelaMapa()),
+                );
+              },
+              icon: Icon(Icons.map),
+            ),
           ],
         ),
       ),
 
-      // BODY
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: StreamBuilder<QuerySnapshot>(
@@ -79,7 +97,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                       dynamic item = dados.docs[index].data();
                       return Card(
                         child: ListTile(
-                          leading: Icon(Icons.description),
+                          leading: Icon(Icons.map_outlined),
                           title: Text(item['titulo']),
                           subtitle: Text(item['descricao']),
                           onTap: () {
@@ -96,7 +114,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                   );
                 } else {
                   return Center(
-                    child: Text('Nenhuma tarefa encontrada.'),
+                    child: Text('Nenhum evento encontrado.'),
                   );
                 }
             }
@@ -112,16 +130,12 @@ class _PrincipalViewState extends State<PrincipalView> {
     );
   }
 
-  //
-  // ADICIONAR TAREFA
-  //
   void salvarTarefa(context, {docId}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // retorna um objeto do tipo Dialog
         return AlertDialog(
-          title: Text("Adicionar Tarefa"),
+          title: Text("Adicionar Evento"),
           content: SizedBox(
             height: 250,
             width: 300,
@@ -160,7 +174,7 @@ class _PrincipalViewState extends State<PrincipalView> {
           actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
           actions: [
             TextButton(
-              child: Text("fechar"),
+              child: Text("Fechar"),
               onPressed: () {
                 txtTitulo.clear();
                 txtDescricao.clear();
@@ -168,7 +182,7 @@ class _PrincipalViewState extends State<PrincipalView> {
               },
             ),
             ElevatedButton(
-              child: Text("salvar"),
+              child: Text("Salvar"),
               onPressed: () {
                 var t = Evento(
                   LoginController().idUsuario(),
@@ -179,14 +193,8 @@ class _PrincipalViewState extends State<PrincipalView> {
                 txtTitulo.clear();
                 txtDescricao.clear();
                 if (docId == null) {
-                  //
-                  // ADICIONAR TAREFA
-                  //
                   EventoController().adicionar(context, t);
                 } else {
-                  //
-                  // ATUALIZAR TAREFA
-                  //
                   EventoController().atualizar(context, docId, t);
                 }
               },

@@ -115,6 +115,23 @@ class LoginController {
     return usuario;
   }
 
+  Future<String> atualizarNomeUsuario(BuildContext context, novoNome) async {
+    var nomeNovo = novoNome;
+    var userId = await idUsuario();
+
+  FirebaseFirestore.instance
+      .collection('usuarios')
+      .doc(idUsuario())
+      .set({'nome': novoNome}, SetOptions(merge: true))
+      .then((result) {
+    sucesso(context, 'Nome do usuário atualizado com sucesso.');
+  }).catchError((e) {
+    erro(context, 'Erro na atualização: ${e.toString()}');
+  });
+
+  return nomeNovo;
+}
+
 
   
 }
