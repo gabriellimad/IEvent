@@ -27,29 +27,6 @@ class _EventoPrivadoState extends State<EventoPrivado> {
         title: Row(
           children: [
             Expanded(child: Text('Eventos Privados')),
-            FutureBuilder<String>(
-              future: LoginController().usuarioLogado(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextButton.icon(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        textStyle: TextStyle(fontSize: 12),
-                      ),
-                      onPressed: () {
-                        LoginController().logout();
-                        Navigator.pushReplacementNamed(context, 'login');
-                      },
-                      icon: Icon(Icons.exit_to_app, size: 14),
-                      label: Text("Sair"),
-                    ),
-                  );
-                }
-                return Text('');
-              },
-            ),
             IconButton(
               onPressed: () {
                 Navigator.push(
