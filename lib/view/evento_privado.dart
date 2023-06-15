@@ -3,19 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:ievent/model/evento.dart';
 import 'package:ievent/view/perfil.dart';
 
-import '../controller/evento_publico_controller.dart';
+import '../controller/evento_privado_controller.dart';
 import '../controller/login_controller.dart';
-import 'evento_privado.dart';
 import 'maps.dart';
 
-class PrincipalView extends StatefulWidget {
-  const PrincipalView({Key? key}) : super(key: key);
+class EventoPrivado extends StatefulWidget {
+  const EventoPrivado({Key? key}) : super(key: key);
 
   @override
-  State<PrincipalView> createState() => _PrincipalViewState();
+  State<EventoPrivado> createState() => _EventoPrivadoState();
 }
 
-class _PrincipalViewState extends State<PrincipalView> {
+class _EventoPrivadoState extends State<EventoPrivado> {
   var txtTitulo = TextEditingController();
   var txtLocal = TextEditingController();
   var txtDescricao = TextEditingController();
@@ -27,7 +26,7 @@ class _PrincipalViewState extends State<PrincipalView> {
         backgroundColor: Color.fromARGB(255, 103, 103, 255),
         title: Row(
           children: [
-            Expanded(child: Text('Eventos Publicos')),
+            Expanded(child: Text('Eventos Privados')),
             FutureBuilder<String>(
               future: LoginController().usuarioLogado(),
               builder: (context, snapshot) {
@@ -40,22 +39,11 @@ class _PrincipalViewState extends State<PrincipalView> {
                         textStyle: TextStyle(fontSize: 12),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PerfilUsuarioScreen(
-                              perfilUsuario: PerfilUsuario(
-                                nome: snapshot.data.toString(),
-                                email: '', // Adicione o email do usuário aqui
-                                fotoPerfilUrl:
-                                    '', // Adicione a URL da foto de perfil do usuário aqui
-                              ),
-                            ),
-                          ),
-                        );
+                        LoginController().logout();
+                        Navigator.pushReplacementNamed(context, 'login');
                       },
-                      icon: Icon(Icons.person, size: 14),
-                      label: Text(''),
+                      icon: Icon(Icons.exit_to_app, size: 14),
+                      label: Text("Sair"),
                     ),
                   );
                 }
@@ -71,22 +59,13 @@ class _PrincipalViewState extends State<PrincipalView> {
               },
               icon: Icon(Icons.map),
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EventoPrivado()),
-                );
-              },
-              icon: Icon(Icons.private_connectivity),
-            ),
           ],
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream: EventoController().listar().snapshots(),
+          stream: EventoPrivadoController().listar().snapshots(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -116,7 +95,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                             salvarTarefa(context, docId: id);
                           },
                           onLongPress: () {
-                            EventoController().excluir(context, id);
+                            EventoPrivadoController().excluir(context, id);
                           },
                         ),
                       );
@@ -203,9 +182,9 @@ class _PrincipalViewState extends State<PrincipalView> {
                 txtTitulo.clear();
                 txtDescricao.clear();
                 if (docId == null) {
-                  EventoController().adicionar(context, t);
+                  EventoPrivadoController().adicionar(context, t);
                 } else {
-                  EventoController().atualizar(context, docId, t);
+                  EventoPrivadoController().atualizar(context, docId, t);
                 }
               },
             ),

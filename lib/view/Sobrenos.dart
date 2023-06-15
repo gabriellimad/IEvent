@@ -61,7 +61,8 @@ class Sobrenos extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage('lib/images/perfilgiovana.jpg'),
+                        backgroundImage:
+                            AssetImage('lib/images/perfilgiovana.jpg'),
                       ),
                       SizedBox(height: 8),
                       Text(
@@ -82,14 +83,14 @@ class Sobrenos extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetalhesAutor(
-                          nome: 'Maria',
-                          idade: 30,
-                          email: 'maria@example.com',
-                          numero: '987654321',
-                          areaProfissional: 'Design',
-                          faculdade: 'Universidade XYZ',
-                          professor: 'Professor Y',
-                          imageUrl: 'lib/images/foto_perfil_2.jpg',
+                          nome: 'Gabriel',
+                          idade: 22,
+                          email: 'Gabriel@gmail.com',
+                          numero: '16987654321',
+                          areaProfissional: 'Software',
+                          faculdade: 'Fatec RP',
+                          professor: 'Plotze',
+                          imageUrl: 'lib/images/perfilgabriel.jpg',
                         ),
                       ),
                     );
@@ -98,7 +99,8 @@ class Sobrenos extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage('lib/images/foto_perfil_2.jpg'),
+                        backgroundImage:
+                            AssetImage('lib/images/perfilgabriel.jpg'),
                       ),
                       SizedBox(height: 8),
                       Text(
