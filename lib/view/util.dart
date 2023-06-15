@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-//
+
 // MENSAGEM DE ERRO
-//
 void erro(context, String msg) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -15,9 +14,7 @@ void erro(context, String msg) {
   );
 }
 
-//
 // MENSAGEM DE SUCESSO
-//
 void sucesso(context, String msg) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(

@@ -69,7 +69,7 @@ class _EventoPrivadoState extends State<EventoPrivado> {
                           onTap: () {
                             txtTitulo.text = item['titulo'];
                             txtDescricao.text = item['descricao'];
-                            salvarTarefa(context, docId: id);
+                            salvarEvento(context, docId: id);
                           },
                           onLongPress: () {
                             EventoPrivadoController().excluir(context, id);
@@ -89,14 +89,14 @@ class _EventoPrivadoState extends State<EventoPrivado> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          salvarTarefa(context);
+          salvarEvento(context);
         },
         child: Icon(Icons.add),
       ),
     );
   }
 
-  void salvarTarefa(context, {docId}) {
+  void salvarEvento(context, {docId}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

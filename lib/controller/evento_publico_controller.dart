@@ -10,7 +10,7 @@ class EventoController {
     FirebaseFirestore.instance
         .collection('eventosPub')
         .add(e.toJson())
-        .then((value) => sucesso(context, 'Evento adicionada com sucesso'))
+        .then((value) => sucesso(context, 'Evento adicionado com sucesso'))
         .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'))
         .whenComplete(() => Navigator.of(context).pop());
   }
@@ -20,7 +20,7 @@ class EventoController {
         .collection('eventosPub')
         .doc(id)
         .update(e.toJson())
-        .then((value) => sucesso(context, 'Evento atualizada com sucesso'))
+        .then((value) => sucesso(context, 'Evento atualizado com sucesso'))
         .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'));
   }
 

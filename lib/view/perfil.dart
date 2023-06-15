@@ -39,7 +39,6 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
         nomeUsuario = nomeAtualizado;
       });
     }).catchError((e) {
-      // Trate o erro aqui, se necessário
       print('Erro ao atualizar o nome: $e');
     });
   }
