@@ -56,6 +56,7 @@ void deslogar() async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 103, 103, 255),
         title: Text('Perfil do Usuário'),
         actions: [
           IconButton(

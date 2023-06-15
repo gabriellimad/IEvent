@@ -26,7 +26,8 @@ class DetalhesAutor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalhes do Usuário'),
+        backgroundColor: Color.fromARGB(255, 103, 103, 255),
+        title: Text('Quem somos nós?'),
       ),
       body: Center(
         child: SingleChildScrollView(

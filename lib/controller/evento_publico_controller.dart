@@ -30,8 +30,7 @@ class EventoController {
         .doc(id)
         .delete()
         .then((value) => sucesso(context, 'Evento excluído com sucesso'))
-        .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'))
-        .whenComplete(() => Navigator.of(context).pop());
+        .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'));
   }
 
   listar() {
