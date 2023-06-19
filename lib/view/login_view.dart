@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
-import 'Sobrenos.dart';
+import 'sobrenos.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Senha',
-                prefixIcon: Icon(Icons.password),
+                prefixIcon: Icon(Icons.lock),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -109,6 +109,9 @@ class _LoginViewState extends State<LoginView> {
                                 txtEmailEsqueceuSenha.text,
                               );
                             },
+                            style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(255, 103, 103, 255),
+                            ),
                             child: Text('enviar'),
                           ),
                         ],
@@ -116,13 +119,17 @@ class _LoginViewState extends State<LoginView> {
                     },
                   );
                 },
-                child: Text('Esqueceu a senha?'),
+                child: Text(
+                  'Esqueceu a senha?',
+                  style: TextStyle(color: Color.fromARGB(255, 103, 103, 255)),
+                ),
               ),
             ),
             SizedBox(height: 15),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200, 40),
+                primary: Color.fromARGB(255, 103, 103, 255),
               ),
               onPressed: () {
                 LoginController().login(
@@ -142,7 +149,10 @@ class _LoginViewState extends State<LoginView> {
                   onPressed: () {
                     Navigator.pushNamed(context, 'cadastrar');
                   },
-                  child: Text('Cadastre-se'),
+                  child: Text(
+                    'Cadastre-se',
+                    style: TextStyle(color: Color.fromARGB(255, 103, 103, 255)),
+                  ),
                 ),
               ],
             )

@@ -1,41 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../model/evento.dart';
+import '../model/empresa.dart';
 import '../view/util.dart';
 import 'login_controller.dart';
 
-class EventoPrivadoController {
-  void adicionar(context, Evento e) {
+class EmpresaController {
+  void adicionar(context, Empresa e) {
     FirebaseFirestore.instance
-        .collection('eventosPri')
+        .collection('empresas')
         .add(e.toJson())
-        .then((value) => sucesso(context, 'Evento adicionada com sucesso'))
+        .then((value) => sucesso(context, 'Empresa adicionada com sucesso'))
         .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'))
         .whenComplete(() => Navigator.of(context).pop());
   }
 
-  void atualizar(context, id, Evento e) {
+  void atualizar(context, id, Empresa e) {
     FirebaseFirestore.instance
-        .collection('eventosPri')
+        .collection('empresas')
         .doc(id)
         .update(e.toJson())
-        .then((value) => sucesso(context, 'Evento atualizada com sucesso'))
+        .then((value) => sucesso(context, 'Empresa atualizada com sucesso'))
         .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'));
   }
 
   void excluir(context, id) {
     FirebaseFirestore.instance
-        .collection('eventosPri')
+        .collection('empresas')
         .doc(id)
         .delete()
-        .then((value) => sucesso(context, 'Evento excluído com sucesso'))
+        .then((value) => sucesso(context, 'Empresa excluído com sucesso'))
         .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'));
   }
 
   listar() {
     return FirebaseFirestore.instance
-        .collection('eventosPri')
+        .collection('empresas')
         .where('uid', isEqualTo: LoginController().idUsuario());
   }
 }

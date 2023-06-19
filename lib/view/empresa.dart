@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:ievent/model/evento.dart';
 import 'package:ievent/view/perfil.dart';
 
-import '../controller/evento_privado_controller.dart';
+import '../controller/empresa_controller.dart';
 import '../controller/login_controller.dart';
 import 'maps.dart';
 
-class EventoPrivado extends StatefulWidget {
-  const EventoPrivado({Key? key}) : super(key: key);
+class EmpresaView extends StatefulWidget {
+  const EmpresaView({Key? key}) : super(key: key);
 
   @override
-  State<EventoPrivado> createState() => _EventoPrivadoState();
+  State<EmpresaView> createState() => _EmpresaViewState();
 }
 
-class _EventoPrivadoState extends State<EventoPrivado> {
+class _EmpresaViewState extends State<EmpresaView> {
   var txtTitulo = TextEditingController();
   var txtLocal = TextEditingController();
   var txtDescricao = TextEditingController();
@@ -42,7 +42,7 @@ class _EventoPrivadoState extends State<EventoPrivado> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream: EventoPrivadoController().listar().snapshots(),
+          stream: EmpresaController().listar().snapshots(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -72,7 +72,7 @@ class _EventoPrivadoState extends State<EventoPrivado> {
                             salvarEvento(context, docId: id);
                           },
                           onLongPress: () {
-                            EventoPrivadoController().excluir(context, id);
+                            EmpresaController().excluir(context, id);
                           },
                         ),
                       );
@@ -159,9 +159,9 @@ class _EventoPrivadoState extends State<EventoPrivado> {
                 txtTitulo.clear();
                 txtDescricao.clear();
                 if (docId == null) {
-                  EventoPrivadoController().adicionar(context, t);
+                  // EmpresaController().adicionar(context, t);
                 } else {
-                  EventoPrivadoController().atualizar(context, docId, t);
+                  // EmpresaController().atualizar(context, docId, t);
                 }
               },
             ),

@@ -19,10 +19,6 @@ class Evento {
 
   factory Evento.fromJson(Map<String, dynamic> json) {
     return Evento(
-      json['uid'],
-      json['titulo'],
-      json['descricao'],
-      json['local']
-    );
+        json['uid'], json['titulo'], json['descricao'], json['local']);
   }
 }
