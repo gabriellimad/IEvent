@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../model/empresa.dart';
-import 'empresa.dart';
+import 'package:ievent/model/evento_privado.dart';
+import 'package:ievent/view/evento_privado.dart';
 import 'evento_publico.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,17 +19,17 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
-  void _navigateToEventView() {
+  void _navigateToEventPublicView() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => EventoPublico()),
+      MaterialPageRoute(builder: (context) => EventoPublicoView()),
     );
   }
 
-  void _navigateToEmpresaView() {
+  void _navigateToEventPrivateView() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => EmpresaView()),
+      MaterialPageRoute(builder: (context) => EventoPrivadoView()),
     );
   }
 
@@ -67,18 +67,6 @@ class _HomeViewState extends State<HomeView> {
                         style: TextStyle(fontSize: 25),
                       ),
                     ),
-                    SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: _navigateToEmpresaView,
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 103, 103, 255),
-                        fixedSize: Size(300, 120),
-                      ),
-                      child: Text(
-                        'Gerenciar Empresas',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
                   ],
                 ),
               SizedBox(height: 20),
@@ -87,7 +75,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        _navigateToEventView();
+                        _navigateToEventPublicView();
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 103, 103, 255),
@@ -101,7 +89,7 @@ class _HomeViewState extends State<HomeView> {
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        _navigateToEventView();
+                        _navigateToEventPrivateView();
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 103, 103, 255),

@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
-import '../controller/evento_publico_controller.dart';
+import '../controller/evento_privado_controller.dart';
 import '../controller/login_controller.dart';
-import '../model/evento_publico.dart';
+import '../model/evento_privado.dart';
 import 'maps.dart';
 
-class EventoPublicoView extends StatefulWidget {
-  const EventoPublicoView({Key? key}) : super(key: key);
+class EventoPrivadoView extends StatefulWidget {
+  const EventoPrivadoView({Key? key}) : super(key: key);
 
   @override
-  State<EventoPublicoView> createState() => _EventoPublicoViewState();
+  State<EventoPrivadoView> createState() => _EventoPrivadoViewState();
 }
 
-class _EventoPublicoViewState extends State<EventoPublicoView> {
+class _EventoPrivadoViewState extends State<EventoPrivadoView> {
   var txtNome = TextEditingController();
   var txtLocal = TextEditingController();
   var txtDescricao = TextEditingController();
@@ -85,7 +85,7 @@ class _EventoPublicoViewState extends State<EventoPublicoView> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: StreamBuilder<QuerySnapshot>(
-            stream: EventoPublicoController().listar().snapshots(),
+            stream: EventoPrivadoController().listar().snapshots(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -126,7 +126,7 @@ class _EventoPublicoViewState extends State<EventoPublicoView> {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    EventoPublicoController()
+                                    EventoPrivadoController()
                                         .excluir(context, id);
                                   },
                                   icon: Icon(Icons.delete),
@@ -218,15 +218,19 @@ class _EventoPublicoViewState extends State<EventoPublicoView> {
                 primary: Color.fromARGB(255, 103, 103, 255),
               ),
               onPressed: () {
-                var event = EventoPublico(LoginController().idUsuario(),
-                    txtNome.text, txtLocal.text, txtDescricao.text);
+                var event = EventoPrivado(
+                  LoginController().idUsuario(),
+                  txtNome.text,
+                  txtLocal.text,
+                  txtDescricao.text,
+                );
                 txtNome.clear();
                 txtDescricao.clear();
                 txtLocal.clear();
                 if (docId == null) {
-                  EventoPublicoController().adicionar(context, event);
+                  EventoPrivadoController().adicionar(context, event);
                 } else {
-                  EventoPublicoController().atualizar(context, docId, event);
+                  EventoPrivadoController().atualizar(context, docId, event);
                 }
               },
             ),

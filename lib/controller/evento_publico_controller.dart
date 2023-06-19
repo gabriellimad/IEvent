@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../model/evento.dart';
+import '../model/evento_publico.dart';
 import '../view/util.dart';
 import 'login_controller.dart';
 
-class EventoController {
-  void adicionar(context, Evento e) {
+class EventoPublicoController {
+  void adicionar(context, EventoPublico e) {
     FirebaseFirestore.instance
         .collection('eventosPub')
         .add(e.toJson())
@@ -15,7 +14,7 @@ class EventoController {
         .whenComplete(() => Navigator.of(context).pop());
   }
 
-  void atualizar(context, id, Evento e) {
+  void atualizar(context, id, EventoPublico e) {
     FirebaseFirestore.instance
         .collection('eventosPub')
         .doc(id)
