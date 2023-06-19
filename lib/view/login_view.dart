@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
-import 'sobrenos.dart';
+import 'Sobrenos.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
