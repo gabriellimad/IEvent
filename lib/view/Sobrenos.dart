@@ -7,9 +7,10 @@ class Sobrenos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 103, 103, 255),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -31,7 +32,7 @@ class Sobrenos extends StatelessWidget {
                 child: Text(
                   'Quem somos nós?',
                   style: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 1),
+                    color: Color.fromRGBO(255, 255, 255, 1),
                     fontSize: 30,
                   ),
                 ),
@@ -69,7 +70,7 @@ class Sobrenos extends StatelessWidget {
                       Text(
                         'Giovana',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 250, 250, 250),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -107,7 +108,7 @@ class Sobrenos extends StatelessWidget {
                       Text(
                         'Gabriel',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 241, 241, 241),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -125,7 +126,7 @@ class Sobrenos extends StatelessWidget {
                     ' \t\t Este App está sendo desenvolvido na matéria de dispositivos móveis em Flutter, na FATEC-RP! \n Nosso aplicativo permite que você cadastre eventos e encontre facilmente eventos próximos a você. Com nossa plataforma, você terá acesso a uma lista de eventos\t\t ',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 1),
+                      color: Color.fromARGB(255, 241, 241, 241),
                       fontSize: 16,
                     ),
                   ),

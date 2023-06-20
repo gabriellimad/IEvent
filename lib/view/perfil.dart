@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../controller/login_controller.dart';
 import 'login_view.dart';
 
+
 class PerfilUsuario {
   final String nome;
   final String email;
@@ -43,20 +44,19 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
     });
   }
 
-void deslogar() async {
-  await FirebaseAuth.instance.signOut();
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => LoginView()),
-  );
-}
-
+  void deslogar() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginView()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 103, 103, 255),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         title: Text('Perfil do Usuário'),
         actions: [
           IconButton(

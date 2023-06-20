@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
 
+enum Perfil { pessoal, comercial }
+
 class CadastrarView extends StatefulWidget {
   const CadastrarView({Key? key}) : super(key: key);
 
@@ -14,8 +16,10 @@ class _CadastrarViewState extends State<CadastrarView> {
   var txtSenha = TextEditingController();
   var txtConfirmarSenha = TextEditingController();
 
-  Color senhaCor = Colors.white; // Cor padrão da caixa de "Repetir Senha"
-  bool senhasNaoCoincidem = false; // Variável para controlar a exibição da mensagem de erro
+  Color senhaCor = Colors.white;
+  bool senhasNaoCoincidem = false;
+
+  Perfil? perfilSelecionado; // Variável para armazenar o perfil selecionado
 
   @override
   void initState() {
@@ -65,6 +69,74 @@ class _CadastrarViewState extends State<CadastrarView> {
                 ),
               ),
               SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Opção de perfil pessoal
+                  Column(
+                    children: [
+                      Radio<Perfil>(
+                        value: Perfil.pessoal,
+                        groupValue: perfilSelecionado,
+                        onChanged: (Perfil? value) {
+                          setState(() {
+                            perfilSelecionado = value;
+                          });
+                        },
+                        activeColor: Colors.purple,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            'Pessoal',
+                            style: TextStyle(
+                              color: perfilSelecionado == Perfil.pessoal
+                                  ? Colors.white
+                                  : Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // Opção de perfil comercial
+                  Column(
+                    children: [
+                      Radio<Perfil>(
+                        value: Perfil.comercial,
+                        groupValue: perfilSelecionado,
+                        onChanged: (Perfil? value) {
+                          setState(() {
+                            perfilSelecionado = value;
+                          });
+                        },
+                        activeColor: Colors.purple,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.store,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            'Comercial',
+                            style: TextStyle(
+                              color: perfilSelecionado == Perfil.comercial
+                                  ? Colors.white
+                                  : Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
               TextFormField(
                 controller: txtNome,
                 style: TextStyle(color: Colors.white),
@@ -80,7 +152,7 @@ class _CadastrarViewState extends State<CadastrarView> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color.fromARGB(255, 122, 141, 247)),
+                    borderSide: BorderSide(color: Colors.purple),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -105,7 +177,7 @@ class _CadastrarViewState extends State<CadastrarView> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color.fromARGB(255, 122, 141, 247)),
+                    borderSide: BorderSide(color: Colors.purple),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -131,7 +203,7 @@ class _CadastrarViewState extends State<CadastrarView> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color.fromARGB(255, 122, 141, 247)),
+                    borderSide: BorderSide(color: Colors.purple),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -143,7 +215,7 @@ class _CadastrarViewState extends State<CadastrarView> {
               SizedBox(height: 15),
               TextFormField(
                 controller: txtConfirmarSenha,
-                style: TextStyle(color: senhaCor), // Utilizando a cor da senhaCor na cor do texto do TextFormField
+                style: TextStyle(color: senhaCor),
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Confirmar Senha',
@@ -153,11 +225,11 @@ class _CadastrarViewState extends State<CadastrarView> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: senhaCor), // Utilizando a cor da senhaCor na cor da borda do TextFormField
+                    borderSide: BorderSide(color: senhaCor),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color.fromARGB(255, 122, 141, 247)),
+                    borderSide: BorderSide(color: Colors.purple),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   errorBorder: OutlineInputBorder(
@@ -166,7 +238,7 @@ class _CadastrarViewState extends State<CadastrarView> {
                   ),
                 ),
               ),
-              if (senhasNaoCoincidem) // Exibição da mensagem de erro
+              if (senhasNaoCoincidem)
                 Padding(
                   padding: EdgeInsets.only(top: 8),
                   child: Text(
@@ -183,7 +255,7 @@ class _CadastrarViewState extends State<CadastrarView> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(140, 40),
-                    primary: Color.fromARGB(255, 144, 149, 218),
+                    primary: Colors.purple,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
