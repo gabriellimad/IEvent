@@ -10,7 +10,7 @@ class TelaMapa extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 103, 103, 255),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         title: Text('Mapa'),
       ),
       body: Stack(
@@ -24,7 +24,7 @@ class TelaMapa extends StatelessWidget {
                   return snapshot.data!;
                 }
               }
-              return Container(); // Retornar algo caso a imagem não seja carregada corretamente
+              return Container(); 
             },
           ),
         ],
@@ -37,6 +37,8 @@ class TelaMapa extends StatelessWidget {
           );
         },
         child: Icon(Icons.filter_list),
+        backgroundColor: Color.fromARGB(255, 0, 139, 19),
+        
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
