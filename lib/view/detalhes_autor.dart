@@ -26,7 +26,7 @@ class DetalhesAutor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 103, 103, 255),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         title: Text('Quem somos nós?'),
       ),
       body: Center(

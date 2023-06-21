@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
-
+import '../controller/evento_publico_controller.dart';
+import '../controller/login_controller.dart';
 import 'maps.dart';
 
-import 'package:flutter/material.dart';
-import 'package:ievent/view/perfil.dart';
-import 'maps.dart';
-
-import 'package:flutter/material.dart';
-import 'package:ievent/view/perfil.dart';
-import 'maps.dart';
+enum TipoEvento { Publico, Privado }
 
 class TelaPrincipal extends StatefulWidget {
   @override
@@ -20,6 +15,9 @@ class _TelaPrincipalState extends State<TelaPrincipal>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _isExpanded = false;
+  TipoEvento _tipoEventoSelecionado = TipoEvento.Publico;
+
+  List<String> nomesUsuarios = ['@maria', '@leticia', '@gabriel'];
 
   @override
   void initState() {
@@ -37,6 +35,14 @@ class _TelaPrincipalState extends State<TelaPrincipal>
     setState(() {
       _isExpanded = !_isExpanded;
     });
+  }
+
+  void _onTipoEventoChanged(TipoEvento? value) {
+    if (value != null) {
+      setState(() {
+        _tipoEventoSelecionado = value;
+      });
+    }
   }
 
   @override
@@ -75,8 +81,8 @@ class _TelaPrincipalState extends State<TelaPrincipal>
         bottom: TabBar(
           controller: _tabController,
           tabs: [
-            Tab(text: 'Públicos'),
-            Tab(text: 'Privados'),
+            Tab(text: 'Eventos'),
+            Tab(text: 'Seguindo'),
           ],
         ),
       ),
@@ -84,10 +90,62 @@ class _TelaPrincipalState extends State<TelaPrincipal>
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Conteúdo da aba "Públicos"
+          // Conteúdo da aba "Eventos"
           ListView(),
-          // Conteúdo da aba "Privados"
-          ListView(),
+          // Conteúdo da aba "Seguindo"
+          ListView.builder(
+            itemCount: nomesUsuarios.length, // Número de publicações
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(197, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Cabeçalho da publicação
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: AssetImage('lib/images/iconperfil.jpg'),
+                            radius: 24,
+                          ),
+                          SizedBox(width: 16),
+                          Text(
+                            '${nomesUsuarios[index]}',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Opção de curtida
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.favorite_border),
+                            onPressed: () {
+                              // Ação de curtir a publicação
+                            },
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            '0 Curtidas',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -97,8 +155,9 @@ class _TelaPrincipalState extends State<TelaPrincipal>
         child: Icon(_isExpanded ? Icons.close : Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar:
-          _isExpanded ? _buildExpandedNavigationBar() : _buildCollapsedNavigationBar(),
+      bottomNavigationBar: _isExpanded
+          ? _buildExpandedNavigationBar()
+          : _buildCollapsedNavigationBar(),
     );
   }
 
@@ -159,13 +218,46 @@ class _TelaPrincipalState extends State<TelaPrincipal>
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
           ),
           GestureDetector(
             onTap: () {
-              // Ação para "Criar Evento"
+              // Ação para adicionar evento
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Crie seu evento"),
+                    content: SizedBox(
+                      height: 400,
+                      width: 500,
+                      child: Column(),
+                    ),
+                    actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                    actions: [
+                      TextButton(
+                        child: Text("Fechar"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      ElevatedButton(
+                        child: Text("Salvar"),
+                        onPressed: () {
+                          // Ação para salvar o evento
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             child: Container(
               color: Colors.grey[900],
