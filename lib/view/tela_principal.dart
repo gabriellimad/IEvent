@@ -17,7 +17,7 @@ class _TelaPrincipalState extends State<TelaPrincipal>
   bool _isExpanded = false;
   TipoEvento _tipoEventoSelecionado = TipoEvento.Publico;
 
-  List<String> nomesUsuarios = ['@maria', '@leticia', '@gabriel'];
+  List<String> nomesUsuarios = ['@maria', '@leticia', '@gabriel', '@giovana', '@marcia'];
 
   @override
   void initState() {
@@ -229,35 +229,6 @@ class _TelaPrincipalState extends State<TelaPrincipal>
           GestureDetector(
             onTap: () {
               // Ação para adicionar evento
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("Crie seu evento"),
-                    content: SizedBox(
-                      height: 400,
-                      width: 500,
-                      child: Column(),
-                    ),
-                    actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-                    actions: [
-                      TextButton(
-                        child: Text("Fechar"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      ElevatedButton(
-                        child: Text("Salvar"),
-                        onPressed: () {
-                          // Ação para salvar o evento
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
             },
             child: Container(
               color: Colors.grey[900],
