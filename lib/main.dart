@@ -3,7 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/view/Sobrenos.dart';
 import 'package:ievent/view/cadastro_usuario.dart';
-import 'package:ievent/view/evento_publico.dart';
+import 'package:ievent/view/evento.dart';
+import 'package:ievent/view/tela_home.dart';
 import 'package:ievent/view/tela_principal.dart';
 
 import 'firebase_options.dart';
@@ -24,7 +25,7 @@ Future<void> main() async {
         routes: {
           'cadastrar': (context) => CadastrarView(),
           'login': (context) => LoginView(),
-          'principal': (context) => TelaPrincipal(),
+          'principal': (context) => TelaPrincipalView(),
           'sobrenos': (context) => Sobrenos(),
         },
       ),

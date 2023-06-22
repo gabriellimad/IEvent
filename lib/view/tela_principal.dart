@@ -125,7 +125,7 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                       String id = dados.docs[index].id;
                       dynamic item = dados.docs[index].data();
                       return Card(
-                        color: Color.fromARGB(255, 103, 103, 255),
+                        color: Color.fromARGB(255, 255, 255, 255),
                         child: ListTile(
                           leading: Icon(Icons.map_outlined),
                           title: Text(item['nome']),
