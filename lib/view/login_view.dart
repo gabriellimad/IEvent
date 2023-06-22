@@ -176,9 +176,6 @@ class _LoginViewState extends State<LoginView> {
                   txtEmail.text,
                   txtSenha.text,
                 );
-
-                // Navegação para a tela principal
-                Navigator.pushNamed(context, 'principal');
               },
               child: Text('Entrar'),
             ),
