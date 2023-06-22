@@ -4,17 +4,18 @@ import 'package:ievent/view/perfil.dart';
 import '../controller/evento_publico_controller.dart';
 import '../controller/login_controller.dart';
 import '../model/evento_publico.dart';
+import 'criar_evento.dart';
 import 'evento_salvo.dart';
 import 'maps.dart';
 
 enum TipoEvento { Publico, Privado }
 
-class TelaPrincipal extends StatefulWidget {
+class EventosView extends StatefulWidget {
   @override
-  _TelaPrincipalState createState() => _TelaPrincipalState();
+  _EventosViewState createState() => _EventosViewState();
 }
 
-class _TelaPrincipalState extends State<TelaPrincipal>
+class _EventosViewState extends State<EventosView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _isExpanded = false;
@@ -257,7 +258,11 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                   IconButton(
                     color: Color.fromARGB(255, 103, 103, 255),
                     onPressed: () {
-                      addEvent(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CadastroScreen()),
+                      );
                     },
                     icon: Icon(Icons.add_circle_outline),
                   ),

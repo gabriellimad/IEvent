@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ievent/view/tela_principal.dart';
+import 'package:ievent/view/eventos_view.dart';
 
 import 'evento_salvo.dart';
 import 'maps.dart';
@@ -76,7 +76,8 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
         // Simulação de publicações de pessoas que você está seguindo
         _buildPublicacao(
           usuario: 'Rodeio',
-          texto: 'Evento country, montaria, ambiente descontraído, Animação, cultura e música country.',
+          texto:
+              'Evento country, montaria, ambiente descontraído, Animação, cultura e música country.',
           local: "Arena do café",
           likes: 600,
           comentarios: 325,
@@ -220,7 +221,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
               );
             },
           ),
-                    IconButton(
+          IconButton(
             icon: Icon(Icons.heart_broken_rounded),
             color: Colors.white,
             onPressed: () {
@@ -252,7 +253,10 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
               if (value == 'criar_publicacao') {
                 // Ação para criar publicação
               } else if (value == 'criar_evento') {
-                // Ação para criar evento
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EventosView()),
+                );
               } else if (value == 'eventos_populares') {
                 // Ação para exibir eventos mais populares
               }

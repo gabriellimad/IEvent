@@ -3,9 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/view/Sobrenos.dart';
 import 'package:ievent/view/cadastro_usuario.dart';
-import 'package:ievent/view/evento.dart';
 import 'package:ievent/view/tela_home.dart';
-import 'package:ievent/view/tela_principal.dart';
+import 'package:ievent/view/eventos_view.dart';
 
 import 'firebase_options.dart';
 import 'view/login_view.dart';
@@ -17,7 +16,6 @@ Future<void> main() async {
 
   runApp(
     DevicePreview(
-      
       builder: (context) => MaterialApp(
         useInheritedMediaQuery: true,
         debugShowCheckedModeBanner: false,
