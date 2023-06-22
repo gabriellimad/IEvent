@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
 import '../controller/evento_publico_controller.dart';
 import '../controller/login_controller.dart';
+import '../model/evento_publico.dart';
 import 'evento_salvo.dart';
 import 'maps.dart';
 
@@ -17,8 +19,17 @@ class _TelaPrincipalState extends State<TelaPrincipal>
   late TabController _tabController;
   bool _isExpanded = false;
   TipoEvento _tipoEventoSelecionado = TipoEvento.Publico;
+  var txtNome = TextEditingController();
+  var txtLocal = TextEditingController();
+  var txtDescricao = TextEditingController();
 
-  List<String> nomesUsuarios = ['@maria', '@leticia', '@gabriel', '@giovana', '@marcia'];
+  List<String> nomesUsuarios = [
+    '@maria',
+    '@leticia',
+    '@gabriel',
+    '@giovana',
+    '@marcia'
+  ];
 
   @override
   void initState() {
@@ -51,105 +62,113 @@ class _TelaPrincipalState extends State<TelaPrincipal>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          'iEvent',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.person),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PerfilUsuarioScreen(
-                    perfilUsuario: PerfilUsuario(
-                      nome: 'Nome',
-                      email: 'email@example.com',
-                      fotoPerfilUrl: 'URL da Foto',
+        title: Row(
+          children: [
+            Expanded(child: Text('Eventos')),
+            FutureBuilder<String>(
+              future: LoginController().usuarioLogado(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextButton.icon(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        textStyle: TextStyle(fontSize: 12),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PerfilUsuarioScreen(
+                              perfilUsuario: PerfilUsuario(
+                                nome: snapshot.data.toString(),
+                                email: 'email@example.com',
+                                fotoPerfilUrl: 'URL da Foto',
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.person, size: 14),
+                      label: Text(''),
                     ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Eventos'),
-            Tab(text: 'Seguindo'),
+                  );
+                }
+                return Text('');
+              },
+            ),
           ],
         ),
       ),
       backgroundColor: Colors.black,
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          // Conteúdo da aba "Eventos"
-          ListView(),
-          // Conteúdo da aba "Seguindo"
-          ListView.builder(
-            itemCount: nomesUsuarios.length, // Número de publicações
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(197, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Cabeçalho da publicação
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: AssetImage('lib/images/iconperfil.jpg'),
-                            radius: 24,
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: EventosController().listar().snapshots(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                return Center(
+                  child: Text('Não foi possível conectar.'),
+                );
+              case ConnectionState.waiting:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              default:
+                final dados = snapshot.requireData;
+                if (dados.size > 0) {
+                  return ListView.builder(
+                    itemCount: dados.size,
+                    itemBuilder: (context, index) {
+                      String id = dados.docs[index].id;
+                      dynamic item = dados.docs[index].data();
+                      return Card(
+                        color: Color.fromARGB(255, 103, 103, 255),
+                        child: ListTile(
+                          leading: Icon(Icons.map_outlined),
+                          title: Text(item['nome']),
+                          subtitle: Text(item['descricao']),
+                          onTap: () {
+                            txtNome.text = item['nome'];
+                            txtDescricao.text = item['descricao'];
+                          },
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  txtNome.text = item['nome'];
+                                  txtLocal.text = item['local'];
+                                  txtDescricao.text = item['descricao'];
+                                  addEvent(context, docId: id);
+                                },
+                                icon: Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  EventosController().excluir(context, id);
+                                },
+                                icon: Icon(Icons.delete),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 16),
-                          Text(
-                            '${nomesUsuarios[index]}',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Opção de curtida
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.favorite_border),
-                            onPressed: () {
-                              // Ação de curtir a publicação
-                            },
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            '0 Curtidas',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: Text('Não há eventos registrados.'),
+                  );
+                }
+            }
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 103, 103, 255),
         onPressed: () {
           _toggleExpand();
         },
@@ -171,10 +190,10 @@ class _TelaPrincipalState extends State<TelaPrincipal>
           IconButton(
             icon: Icon(Icons.notifications),
             color: Colors.white,
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
               );
             },
           ),
@@ -231,23 +250,16 @@ class _TelaPrincipalState extends State<TelaPrincipal>
               // Ação para adicionar evento
             },
             child: Container(
-              color: Colors.grey[900],
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.add_circle_outline,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    'Criar Evento',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                  IconButton(
+                    color: Color.fromARGB(255, 103, 103, 255),
+                    onPressed: () {
+                      addEvent(context);
+                    },
+                    icon: Icon(Icons.add_circle_outline),
                   ),
                 ],
               ),
@@ -282,6 +294,85 @@ class _TelaPrincipalState extends State<TelaPrincipal>
           ),
         ],
       ),
+    );
+  }
+
+  void addEvent(context, {docId}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Adicionar Evento"),
+          content: SizedBox(
+            height: 250,
+            width: 300,
+            child: Column(
+              children: [
+                TextField(
+                  controller: txtNome,
+                  decoration: InputDecoration(
+                    labelText: 'Nome',
+                    prefixIcon: Icon(Icons.title),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: txtLocal,
+                  decoration: InputDecoration(
+                    labelText: 'Local',
+                    prefixIcon: Icon(Icons.location_on),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: txtDescricao,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    labelText: 'Descrição',
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+          actions: [
+            TextButton(
+              child: Text(
+                "Fechar",
+                style: TextStyle(color: Color.fromARGB(255, 103, 103, 255)),
+              ),
+              onPressed: () {
+                txtNome.clear();
+                txtDescricao.clear();
+                txtLocal.clear();
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: Text("Salvar"),
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 103, 103, 255),
+              ),
+              onPressed: () {
+                var event = Eventos(LoginController().idUsuario(), txtNome.text,
+                    txtLocal.text, txtDescricao.text);
+                txtNome.clear();
+                txtDescricao.clear();
+                txtLocal.clear();
+                if (docId == null) {
+                  EventosController().adicionar(context, event);
+                } else {
+                  EventosController().atualizar(context, docId, event);
+                }
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
