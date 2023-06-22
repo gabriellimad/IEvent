@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
 import '../controller/evento_publico_controller.dart';
 import '../controller/login_controller.dart';
+import 'evento_salvo.dart';
 import 'maps.dart';
 
 enum TipoEvento { Publico, Privado }
@@ -170,8 +171,11 @@ class _TelaPrincipalState extends State<TelaPrincipal>
           IconButton(
             icon: Icon(Icons.notifications),
             color: Colors.white,
-            onPressed: () {
-              // Ação para notificações
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
+              );
             },
           ),
           IconButton(
@@ -218,10 +222,6 @@ class _TelaPrincipalState extends State<TelaPrincipal>
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                  ),
                 ),
               ],
             ),

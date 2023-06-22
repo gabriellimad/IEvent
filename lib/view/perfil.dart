@@ -182,7 +182,7 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
             controller: controller,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              labelText: 'Novo Nome',
+              labelText: 'Novo nome',
               labelStyle: TextStyle(color: Colors.white),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
