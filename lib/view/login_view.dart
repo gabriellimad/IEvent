@@ -156,8 +156,8 @@ class _LoginViewState extends State<LoginView> {
                   );
                 },
                 child: Text(
-                  'Esqueceu a senha?',
-                  style: TextStyle(color: Color.fromARGB(255, 103, 103, 255)),
+                  'Precisa de ajudar para logar?',
+                  style: TextStyle(color: Color.fromARGB(255, 241, 241, 241)),
                 ),
               ),
             ),
