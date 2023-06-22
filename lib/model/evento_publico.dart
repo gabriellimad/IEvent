@@ -1,10 +1,10 @@
-class EventoPublico {
+class Eventos {
   final String uid;
   final String nome;
   final String local;
   final String descricao;
 
-  EventoPublico(this.uid, this.nome, this.local, this.descricao);
+  Eventos(this.uid, this.nome, this.local, this.descricao);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -15,8 +15,8 @@ class EventoPublico {
     };
   }
 
-  factory EventoPublico.fromJson(Map<String, dynamic> json) {
-    return EventoPublico(
+  factory Eventos.fromJson(Map<String, dynamic> json) {
+    return Eventos(
         json['uid'], json['nome'], json['local'], json['descricao']);
   }
 }

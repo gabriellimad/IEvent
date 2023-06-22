@@ -104,6 +104,7 @@ class _LoginViewState extends State<LoginView> {
               child: TextButton(
                 onPressed: () {
                   showDialog(
+                    
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
@@ -113,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                           child: Column(
                             children: [
                               Text(
-                                "Identifique-se para receber um e-mail com as instruções e o link para criar uma nova senha.",
+                                "Digite seu e-mail cadastrado para receber o link para criar uma nova senha.",
                                 style: TextStyle(color: Colors.black),
                               ),
                               SizedBox(height: 25),
@@ -156,15 +157,15 @@ class _LoginViewState extends State<LoginView> {
                   );
                 },
                 child: Text(
-                  'Precisa de ajudar para logar?',
+                  'Precisa de ajuda para logar?',
                   style: TextStyle(color: Color.fromARGB(255, 241, 241, 241)),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(200, 40),
+                minimumSize: Size(400, 50),
                 primary: Color.fromARGB(255, 103, 103, 255),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -179,27 +180,38 @@ class _LoginViewState extends State<LoginView> {
               },
               child: Text('Entrar'),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Ainda não tem conta?',
-                  style: TextStyle(color: Colors.white),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'cadastrar');
-                  },
-                  child: Text(
-                    'Cadastre-se',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 103, 103, 255),
-                    ),
+            SizedBox(height: 200),
+            Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: Colors.grey,
                   ),
                 ),
-              ],
-            )
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'cadastrar');
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Ainda não tem conta? ',
+                    style: TextStyle(color: Colors.white),
+                    children: [
+                      TextSpan(
+                        text: 'Cadastre-se',
+                        style: TextStyle(
+                          color: Color.fromARGB(146, 201, 201, 201),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

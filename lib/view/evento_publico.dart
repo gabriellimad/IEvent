@@ -6,17 +6,18 @@ import '../controller/login_controller.dart';
 import '../model/evento_publico.dart';
 import 'maps.dart';
 
-class EventoPublicoView extends StatefulWidget {
-  const EventoPublicoView({Key? key}) : super(key: key);
+class EventosView extends StatefulWidget {
+  const EventosView({Key? key}) : super(key: key);
 
   @override
-  State<EventoPublicoView> createState() => _EventoPublicoViewState();
+  State<EventosView> createState() => _EventosViewState();
 }
 
-class _EventoPublicoViewState extends State<EventoPublicoView> {
+class _EventosViewState extends State<EventosView> {
   var txtNome = TextEditingController();
   var txtLocal = TextEditingController();
   var txtDescricao = TextEditingController();
+  var tipo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class _EventoPublicoViewState extends State<EventoPublicoView> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: StreamBuilder<QuerySnapshot>(
-            stream: EventoPublicoController().listar().snapshots(),
+            stream: EventosController().listar().snapshots(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -126,7 +127,7 @@ class _EventoPublicoViewState extends State<EventoPublicoView> {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    EventoPublicoController()
+                                    EventosController()
                                         .excluir(context, id);
                                   },
                                   icon: Icon(Icons.delete),
@@ -218,15 +219,15 @@ class _EventoPublicoViewState extends State<EventoPublicoView> {
                 primary: Color.fromARGB(255, 103, 103, 255),
               ),
               onPressed: () {
-                var event = EventoPublico(LoginController().idUsuario(),
+                var event = Eventos(LoginController().idUsuario(),
                     txtNome.text, txtLocal.text, txtDescricao.text);
                 txtNome.clear();
                 txtDescricao.clear();
                 txtLocal.clear();
                 if (docId == null) {
-                  EventoPublicoController().adicionar(context, event);
+                  EventosController().adicionar(context, event);
                 } else {
-                  EventoPublicoController().atualizar(context, docId, event);
+                  EventosController().atualizar(context, docId, event);
                 }
               },
             ),
