@@ -76,30 +76,97 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
         ],
       ),
       backgroundColor: Colors.black,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(widget.perfilUsuario.fotoPerfilUrl),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(widget.perfilUsuario.fotoPerfilUrl),
+                ),
+                SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      nomeUsuario,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Text(
+                          'Eventos visitados: 52',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              nomeUsuario,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+          _buildPublicationContainer(
+            'Visitou Museu Dumont -em Dumont-SP',
+            'Evento organizado para todos o públicos, em comemoração ao aniversário da cidade.',
+          ),
+          _buildPublicationContainer(
+            'Título da publicação',
+            'descrição',
+          ),
+          _buildPublicationContainer(
+            'Título da publicação',
+            'Descrição.',
           ),
         ],
       ),
       bottomNavigationBar: _buildCollapsedNavigationBar(),
+    );
+  }
+
+  Widget _buildPublicationContainer(String title, String content) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(content),
+          SizedBox(height: 16),
+          Row(
+            children: [
+              Icon(Icons.favorite, color: Colors.red),
+              SizedBox(width: 8),
+              Text('123 likes'),
+              SizedBox(width: 16),
+              Icon(Icons.date_range, color: Colors.blue),
+              SizedBox(width: 8),
+              Text('dd/mm/aa'),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -141,7 +208,7 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
                 Navigator.of(context).pop();
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 0, 0, 0)),
               ),
             ),
           ],
@@ -152,7 +219,7 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
 
   Widget _buildCollapsedNavigationBar() {
     return BottomAppBar(
-      color: Colors.black,
+      color: Colors.grey[900],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
