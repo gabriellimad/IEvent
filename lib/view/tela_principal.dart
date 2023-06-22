@@ -110,7 +110,7 @@ class _TelaPrincipalState extends State<TelaPrincipal>
             switch (snapshot.connectionState) {
               case ConnectionState.none:
                 return Center(
-                  child: Text('Não foi possível conectar.'),
+                  child: Text('Não foi possível estabelecer conexão.'),
                 );
               case ConnectionState.waiting:
                 return const Center(
@@ -142,7 +142,7 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                                   txtNome.text = item['nome'];
                                   txtLocal.text = item['local'];
                                   txtDescricao.text = item['descricao'];
-                                  addEvent(context, docId: id);
+                                  addEvent(context, eventId: id);
                                 },
                                 icon: Icon(Icons.edit),
                               ),
@@ -297,7 +297,7 @@ class _TelaPrincipalState extends State<TelaPrincipal>
     );
   }
 
-  void addEvent(context, {docId}) {
+  void addEvent(context, {eventId}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -363,10 +363,10 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                 txtNome.clear();
                 txtDescricao.clear();
                 txtLocal.clear();
-                if (docId == null) {
+                if (eventId == null) {
                   EventosController().adicionar(context, event);
                 } else {
-                  EventosController().atualizar(context, docId, event);
+                  EventosController().atualizar(context, eventId, event);
                 }
               },
             ),
