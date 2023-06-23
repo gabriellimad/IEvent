@@ -88,7 +88,6 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
   Widget _buildSeguindoTab() {
     return ListView(
       children: [
-        // Simulação de publicações de pessoas que você está seguindo
         _buildPublicacao(
           nome: 'Rodeio',
           texto:
@@ -182,9 +181,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
 
   Widget _buildParaVoceTab() {
     return ListView(
-      children: [
-        // Listar os eventos criados aqui!
-      ],
+      children: [],
     );
   }
 
@@ -302,15 +299,12 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
             },
             onSelected: (value) {
               if (value == 'criar_publicacao') {
-                // Ação para criar publicação
               } else if (value == 'criar_evento') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => EventosView()),
                 );
-              } else if (value == 'eventos_populares') {
-                // Ação para exibir eventos mais populares
-              }
+              } else if (value == 'eventos_populares') {}
             },
           ),
         ],

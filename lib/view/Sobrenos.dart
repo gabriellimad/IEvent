@@ -7,7 +7,7 @@ class Sobrenos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -78,7 +78,7 @@ class Sobrenos extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 16), // Espaço entre os dois ícones
+                SizedBox(width: 16),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(

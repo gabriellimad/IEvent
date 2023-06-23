@@ -19,7 +19,7 @@ class _CadastrarViewState extends State<CadastrarView> {
   Color senhaCor = Colors.white;
   bool senhasNaoCoincidem = false;
 
-  Perfil? perfilSelecionado; // Variável para armazenar o perfil selecionado
+  Perfil? perfilSelecionado;
 
   @override
   void initState() {
@@ -72,7 +72,6 @@ class _CadastrarViewState extends State<CadastrarView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // Opção de perfil pessoal
                   Column(
                     children: [
                       Radio<Perfil>(
@@ -103,7 +102,6 @@ class _CadastrarViewState extends State<CadastrarView> {
                       ),
                     ],
                   ),
-                  // Opção de perfil comercial
                   Column(
                     children: [
                       Radio<Perfil>(

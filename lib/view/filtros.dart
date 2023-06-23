@@ -6,14 +6,12 @@ class Filtros extends StatefulWidget {
 }
 
 class _FiltrosState extends State<Filtros> {
-  // Valores iniciais para os filtros
-  double _selectedDistance = 5.0; // em km
+  double _selectedDistance = 5.0;
   String _selectedEventType = 'Todos';
   bool _isPublic = true;
   int _selectedAge = 18;
   bool _isPrivate = false;
 
-  // Opções de tipos de eventos
   final List<String> eventTypes = [
     'Todos',
     'Musical',
@@ -79,7 +77,7 @@ class _FiltrosState extends State<Filtros> {
             DropdownButton<String>(
               value: _selectedEventType,
               dropdownColor: Colors.grey[900],
-              underline: Container(), // Remove a linha de seleção
+              underline: Container(),
               onChanged: (value) {
                 setState(() {
                   _selectedEventType = value!;
@@ -180,27 +178,26 @@ class _FiltrosState extends State<Filtros> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-  onPressed: () {
-    Navigator.pop(context); // Retorna à tela anterior (TelaMapa)
-  },
-  label: Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8.0),
-      color: Colors.black,
-    ),
-    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-    child: Text(
-      'Aplicar Filtros',
-      style: TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        label: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            color: Colors.black,
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Text(
+            'Aplicar Filtros',
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        icon: Icon(Icons.filter_list),
       ),
-    ),
-  ),
-  icon: Icon(Icons.filter_list),
-),
-
     );
   }
 }

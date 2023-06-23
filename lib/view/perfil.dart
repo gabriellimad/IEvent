@@ -35,7 +35,9 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
   }
 
   void atualizarNomeUsuario(String novoNome) {
-    LoginController().atualizarNomeUsuario(context, novoNome).then((nomeAtualizado) {
+    LoginController()
+        .atualizarNomeUsuario(context, novoNome)
+        .then((nomeAtualizado) {
       setState(() {
         nomeUsuario = nomeAtualizado;
       });
@@ -84,7 +86,8 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: NetworkImage(widget.perfilUsuario.fotoPerfilUrl),
+                  backgroundImage:
+                      NetworkImage(widget.perfilUsuario.fotoPerfilUrl),
                 ),
                 SizedBox(width: 16),
                 Column(
@@ -174,7 +177,8 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        TextEditingController controller = TextEditingController(text: nomeUsuario);
+        TextEditingController controller =
+            TextEditingController(text: nomeUsuario);
 
         return AlertDialog(
           title: Text('Editar Nome', style: TextStyle(color: Colors.white)),
@@ -208,7 +212,8 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
                 Navigator.of(context).pop();
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 0, 0, 0)),
+                backgroundColor:
+                    MaterialStateProperty.all(Color.fromARGB(255, 0, 0, 0)),
               ),
             ),
           ],
@@ -226,9 +231,7 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
           IconButton(
             icon: Icon(Icons.notifications),
             color: Colors.white,
-            onPressed: () {
-              // Ação para notificações
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.map),
@@ -243,16 +246,12 @@ class _PerfilUsuarioScreenState extends State<PerfilUsuarioScreen> {
           IconButton(
             icon: Icon(Icons.favorite),
             color: Colors.white,
-            onPressed: () {
-              // Ação para favoritos
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.mail),
             color: Colors.white,
-            onPressed: () {
-              // Ação para mensagens
-            },
+            onPressed: () {},
           ),
         ],
       ),
