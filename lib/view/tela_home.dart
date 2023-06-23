@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ievent/view/eventos_view.dart';
+import 'package:ievent/view/perfil.dart';
 
 import 'evento_salvo.dart';
 import 'maps.dart';
@@ -50,6 +51,26 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('iEvent'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PerfilUsuarioScreen(
+                    perfilUsuario: PerfilUsuario(
+                      nome: 'Nome',
+                      email: 'email@example.com',
+                      fotoPerfilUrl: 'URL da Foto',
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: [
@@ -75,7 +96,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
       children: [
         // Simulação de publicações de pessoas que você está seguindo
         _buildPublicacao(
-          usuario: 'Rodeio',
+          titulo: 'Rodeio',
           texto:
               'Evento country, montaria, ambiente descontraído, Animação, cultura e música country.',
           local: "Arena do café",
@@ -86,7 +107,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          usuario: 'Festa São João',
+          titulo: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -96,7 +117,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          usuario: 'Festa São João',
+          titulo: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -106,7 +127,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          usuario: 'Festa São João',
+          titulo: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -116,7 +137,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          usuario: 'Festa São João',
+          titulo: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -138,7 +159,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
   }
 
   Widget _buildPublicacao({
-    required String usuario,
+    required String titulo,
     required String local,
     required String texto,
     required int likes,
@@ -156,7 +177,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            usuario,
+            titulo,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
