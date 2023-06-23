@@ -7,7 +7,7 @@ import 'login_controller.dart';
 class EventosController {
   void adicionar(context, Eventos e) {
     FirebaseFirestore.instance
-        .collection('eventos')
+        .collection('eventoSalvo')
         .add(e.toJson())
         .then((value) => sucesso(context, 'Evento adicionado com sucesso'))
         .catchError((e) => erro(context, 'ERRO: ${e.code.toString()}'))
@@ -16,7 +16,7 @@ class EventosController {
 
   void atualizar(context, id, Eventos e) {
     FirebaseFirestore.instance
-        .collection('eventos')
+        .collection('eventoSalvo')
         .doc(id)
         .update(e.toJson())
         .then((value) => sucesso(context, 'Evento atualizado com sucesso'))
@@ -25,7 +25,7 @@ class EventosController {
 
   void excluir(context, id) {
     FirebaseFirestore.instance
-        .collection('eventos')
+        .collection('eventoSalvo')
         .doc(id)
         .delete()
         .then((value) => sucesso(context, 'Evento excluído com sucesso'))
@@ -34,7 +34,7 @@ class EventosController {
 
   listar() {
     return FirebaseFirestore.instance
-        .collection('eventos')
+        .collection('eventoSalvo')
         .where('uid', isEqualTo: LoginController().idUsuario());
   }
 }

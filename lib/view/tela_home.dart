@@ -14,7 +14,6 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _isExpanded = false;
-  TipoEvento _tipoEventoSelecionado = TipoEvento.Publico;
   var txtNome = TextEditingController();
   var txtLocal = TextEditingController();
   var txtDescricao = TextEditingController();
@@ -35,14 +34,6 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
     setState(() {
       _isExpanded = !_isExpanded;
     });
-  }
-
-  void _onTipoEventoChanged(TipoEvento? value) {
-    if (value != null) {
-      setState(() {
-        _tipoEventoSelecionado = value;
-      });
-    }
   }
 
   @override
@@ -96,7 +87,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
       children: [
         // Simulação de publicações de pessoas que você está seguindo
         _buildPublicacao(
-          titulo: 'Rodeio',
+          usuario: 'Rodeio',
           texto:
               'Evento country, montaria, ambiente descontraído, Animação, cultura e música country.',
           local: "Arena do café",
@@ -107,7 +98,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          titulo: 'Festa São João',
+          usuario: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -117,7 +108,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          titulo: 'Festa São João',
+          usuario: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -127,7 +118,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          titulo: 'Festa São João',
+          usuario: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -137,7 +128,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
           },
         ),
         _buildPublicacao(
-          titulo: 'Festa São João',
+          usuario: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
@@ -159,7 +150,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
   }
 
   Widget _buildPublicacao({
-    required String titulo,
+    required String usuario,
     required String local,
     required String texto,
     required int likes,
@@ -177,7 +168,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            titulo,
+            usuario,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -226,10 +217,10 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
             icon: Icon(Icons.notifications),
             color: Colors.white,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
+              // );
             },
           ),
           IconButton(

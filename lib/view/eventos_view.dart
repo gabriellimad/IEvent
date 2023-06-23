@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
 import '../controller/evento_publico_controller.dart';
 import '../controller/login_controller.dart';
-import '../model/evento_publico.dart';
+import '../model/evento.dart';
 import 'criar_evento.dart';
 import 'evento_salvo.dart';
 import 'maps.dart';
@@ -23,6 +23,7 @@ class _EventosViewState extends State<EventosView>
   var txtNome = TextEditingController();
   var txtLocal = TextEditingController();
   var txtDescricao = TextEditingController();
+  var txtVisibilidade = TextEditingController();
 
   List<String> nomesUsuarios = [
     '@maria',
@@ -65,7 +66,7 @@ class _EventosViewState extends State<EventosView>
         backgroundColor: Colors.black,
         title: Row(
           children: [
-            Expanded(child: Text('Eventos')),
+            Expanded(child: Text('Seus Eventos')),
             FutureBuilder<String>(
               future: LoginController().usuarioLogado(),
               builder: (context, snapshot) {
@@ -130,10 +131,10 @@ class _EventosViewState extends State<EventosView>
                         child: ListTile(
                           leading: Icon(Icons.map_outlined),
                           title: Text(item['nome']),
-                          subtitle: Text(item['descricao']),
+                          subtitle: Text(item['visibilidade']),
                           onTap: () {
                             txtNome.text = item['nome'];
-                            txtDescricao.text = item['descricao'];
+                            txtDescricao.text = item['visibilidade'];
                           },
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -143,6 +144,7 @@ class _EventosViewState extends State<EventosView>
                                   txtNome.text = item['nome'];
                                   txtLocal.text = item['local'];
                                   txtDescricao.text = item['descricao'];
+                                  txtVisibilidade.text = item['visibilidade'];
                                   addEvent(context, eventId: id);
                                 },
                                 icon: Icon(Icons.edit),
@@ -171,133 +173,9 @@ class _EventosViewState extends State<EventosView>
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 103, 103, 255),
         onPressed: () {
-          _toggleExpand();
+          addEvent(context);
         },
-        child: Icon(_isExpanded ? Icons.close : Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: _isExpanded
-          ? _buildExpandedNavigationBar()
-          : _buildCollapsedNavigationBar(),
-    );
-  }
-
-  Widget _buildCollapsedNavigationBar() {
-    return BottomAppBar(
-      color: Colors.grey[900],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.map),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TelaMapa()),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.favorite),
-            color: Colors.white,
-            onPressed: () {
-              // Ação para favoritos
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.mail),
-            color: Colors.white,
-            onPressed: () {
-              // Ação para mensagens
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildExpandedNavigationBar() {
-    return Container(
-      color: Colors.grey[900],
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GestureDetector(
-            onTap: () {
-              _toggleExpand();
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                ),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              // Ação para adicionar evento
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    color: Color.fromARGB(255, 103, 103, 255),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CadastroScreen()),
-                      );
-                    },
-                    icon: Icon(Icons.add_circle_outline),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              // Ação para "Populares"
-            },
-            child: Container(
-              color: Colors.grey[900],
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.star_border,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    'Eventos mais populares do momento',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -306,76 +184,78 @@ class _EventosViewState extends State<EventosView>
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Adicionar Evento"),
-          content: SizedBox(
-            height: 250,
-            width: 300,
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Cadastro de eventos'),
+          ),
+          body: Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextField(
+                TextFormField(
                   controller: txtNome,
                   decoration: InputDecoration(
                     labelText: 'Nome',
-                    prefixIcon: Icon(Icons.title),
-                    border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 10),
-                TextField(
+                SizedBox(height: 16.0),
+                TextFormField(
                   controller: txtLocal,
                   decoration: InputDecoration(
                     labelText: 'Local',
-                    prefixIcon: Icon(Icons.location_on),
-                    border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 10),
-                TextField(
+                SizedBox(height: 16.0),
+                TextFormField(
                   controller: txtDescricao,
-                  maxLines: 5,
                   decoration: InputDecoration(
                     labelText: 'Descrição',
-                    alignLabelWithHint: true,
-                    border: OutlineInputBorder(),
                   ),
+                ),
+                SizedBox(height: 16.0),
+                TextFormField(
+                  controller: txtVisibilidade,
+                  decoration: InputDecoration(
+                    labelText: 'Visibilidade',
+                  ),
+                ),
+                SizedBox(height: 32.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        var event = Eventos(
+                            LoginController().idUsuario(),
+                            txtNome.text,
+                            txtLocal.text,
+                            txtDescricao.text,
+                            txtVisibilidade.text);
+                        txtNome.clear();
+                        txtDescricao.clear();
+                        txtLocal.clear();
+                        txtVisibilidade.clear();
+                        if (eventId == null) {
+                          EventosController().adicionar(context, event);
+                        } else {
+                          EventosController()
+                              .atualizar(context, eventId, event);
+                        }
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Salvar'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Fechar'),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-          actions: [
-            TextButton(
-              child: Text(
-                "Fechar",
-                style: TextStyle(color: Color.fromARGB(255, 103, 103, 255)),
-              ),
-              onPressed: () {
-                txtNome.clear();
-                txtDescricao.clear();
-                txtLocal.clear();
-                Navigator.of(context).pop();
-              },
-            ),
-            ElevatedButton(
-              child: Text("Salvar"),
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 103, 103, 255),
-              ),
-              onPressed: () {
-                var event = Eventos(LoginController().idUsuario(), txtNome.text,
-                    txtLocal.text, txtDescricao.text);
-                txtNome.clear();
-                txtDescricao.clear();
-                txtLocal.clear();
-                if (eventId == null) {
-                  EventosController().adicionar(context, event);
-                } else {
-                  EventosController().atualizar(context, eventId, event);
-                }
-              },
-            ),
-          ],
         );
       },
     );
