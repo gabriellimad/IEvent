@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
-import '../controller/evento_publico_controller.dart';
+import '../controller/evento_controller.dart';
+import '../controller/evento_salvo_controller.dart';
 import '../controller/login_controller.dart';
 import '../model/evento.dart';
 import 'criar_evento.dart';
@@ -20,18 +21,8 @@ class _EventosSalvosViewState extends State<EventosSalvosView>
   late TabController _tabController;
   bool _isExpanded = false;
   TipoEvento _tipoEventoSelecionado = TipoEvento.Publico;
-  var txtNome = TextEditingController();
-  var txtLocal = TextEditingController();
-  var txtDescricao = TextEditingController();
-  var txtVisibilidade = TextEditingController();
-
-  List<String> nomesUsuarios = [
-    '@maria',
-    '@leticia',
-    '@gabriel',
-    '@giovana',
-    '@marcia'
-  ];
+  var txtTitulo = TextEditingController();
+  var txtTexto = TextEditingController();
 
   @override
   void initState() {
@@ -66,7 +57,7 @@ class _EventosSalvosViewState extends State<EventosSalvosView>
         backgroundColor: Colors.black,
         title: Row(
           children: [
-            Expanded(child: Text('Seus Eventos')),
+            Expanded(child: Text('Eventos Salvos')),
             FutureBuilder<String>(
               future: LoginController().usuarioLogado(),
               builder: (context, snapshot) {
@@ -107,7 +98,7 @@ class _EventosSalvosViewState extends State<EventosSalvosView>
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream: EventosController().listar().snapshots(),
+          stream: EventosSalvosController().listar().snapshots(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -130,28 +121,19 @@ class _EventosSalvosViewState extends State<EventosSalvosView>
                         color: Color.fromARGB(255, 255, 255, 255),
                         child: ListTile(
                           leading: Icon(Icons.map_outlined),
-                          title: Text(item['nome']),
-                          subtitle: Text(item['visibilidade']),
+                          title: Text(item['titulo']),
+                          subtitle: Text(item['texto']),
                           onTap: () {
-                            txtNome.text = item['nome'];
-                            txtDescricao.text = item['visibilidade'];
+                            txtTitulo.text = item['titulo'];
+                            txtTexto.text = item['texto'];
                           },
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  txtNome.text = item['nome'];
-                                  txtLocal.text = item['local'];
-                                  txtDescricao.text = item['descricao'];
-                                  txtVisibilidade.text = item['visibilidade'];
-                                  addEvent(context, eventId: id);
-                                },
-                                icon: Icon(Icons.edit),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  EventosController().excluir(context, id);
+                                  EventosSalvosController()
+                                      .excluir(context, id);
                                 },
                                 icon: Icon(Icons.delete),
                               ),
@@ -170,94 +152,6 @@ class _EventosSalvosViewState extends State<EventosSalvosView>
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 103, 103, 255),
-        onPressed: () {
-          addEvent(context);
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  void addEvent(context, {eventId}) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Cadastro de eventos'),
-          ),
-          body: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: txtNome,
-                  decoration: InputDecoration(
-                    labelText: 'Nome',
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: txtLocal,
-                  decoration: InputDecoration(
-                    labelText: 'Local',
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: txtDescricao,
-                  decoration: InputDecoration(
-                    labelText: 'Descrição',
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: txtVisibilidade,
-                  decoration: InputDecoration(
-                    labelText: 'Visibilidade',
-                  ),
-                ),
-                SizedBox(height: 32.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        var event = Eventos(
-                            LoginController().idUsuario(),
-                            txtNome.text,
-                            txtLocal.text,
-                            txtDescricao.text,
-                            txtVisibilidade.text);
-                        txtNome.clear();
-                        txtDescricao.clear();
-                        txtLocal.clear();
-                        txtVisibilidade.clear();
-                        if (eventId == null) {
-                          EventosController().adicionar(context, event);
-                        } else {
-                          EventosController()
-                              .atualizar(context, eventId, event);
-                        }
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Salvar'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Fechar'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

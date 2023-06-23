@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ievent/view/Sobrenos.dart';
+import 'package:ievent/view/sobrenos.dart';
 import 'package:ievent/view/cadastro_usuario.dart';
 import 'package:ievent/view/tela_home.dart';
 import 'package:ievent/view/eventos_view.dart';

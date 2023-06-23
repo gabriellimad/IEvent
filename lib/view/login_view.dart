@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
-import 'Sobrenos.dart';
+import 'sobrenos.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -75,7 +75,8 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Color.fromARGB(255, 171, 53, 240)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 171, 53, 240)),
                 ),
               ),
             ),
@@ -94,7 +95,8 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Color.fromARGB(255, 171, 53, 240)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 171, 53, 240)),
                 ),
               ),
             ),
@@ -104,7 +106,6 @@ class _LoginViewState extends State<LoginView> {
               child: TextButton(
                 onPressed: () {
                   showDialog(
-                    
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
@@ -124,7 +125,8 @@ class _LoginViewState extends State<LoginView> {
                                 decoration: InputDecoration(
                                   labelText: 'Email',
                                   labelStyle: TextStyle(color: Colors.black),
-                                  prefixIcon: Icon(Icons.email, color: Colors.black),
+                                  prefixIcon:
+                                      Icon(Icons.email, color: Colors.black),
                                   border: OutlineInputBorder(),
                                 ),
                               ),

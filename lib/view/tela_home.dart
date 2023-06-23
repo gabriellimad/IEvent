@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ievent/view/eventos_view.dart';
 import 'package:ievent/view/perfil.dart';
 
+import '../controller/evento_salvo_controller.dart';
+import '../controller/login_controller.dart';
+import '../model/evento_salvo.dart';
 import 'evento_salvo.dart';
 import 'maps.dart';
 
@@ -87,54 +90,90 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
       children: [
         // Simulação de publicações de pessoas que você está seguindo
         _buildPublicacao(
-          usuario: 'Rodeio',
+          nome: 'Rodeio',
           texto:
               'Evento country, montaria, ambiente descontraído, Animação, cultura e música country.',
           local: "Arena do café",
           likes: 600,
           comentarios: 325,
           onSave: () {
-            // Lógica para salvar a publicação
+            var e = EventosSalvos(LoginController().idUsuario(), 'Rodeio',
+                'Evento country, montaria, ambiente descontraído, Animação, cultura e música country.');
+            EventosSalvosController().adicionar(context, e);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventosSalvosView()),
+            );
           },
         ),
         _buildPublicacao(
-          usuario: 'Festa São João',
+          nome: 'Festa São João',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
           comentarios: 48,
           onSave: () {
-            // Lógica para salvar a publicação
+            var e = EventosSalvos(
+                LoginController().idUsuario(),
+                'Festa São João',
+                'Evento cultural, músicas e comidas típicas!');
+            EventosSalvosController().adicionar(context, e);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventosSalvosView()),
+            );
           },
         ),
         _buildPublicacao(
-          usuario: 'Festa São João',
+          nome: 'Festa de crianças',
+          texto: 'Evento lúdico, músicas e comidas típicas!',
+          local: "Av Luzitana",
+          likes: 254,
+          comentarios: 48,
+          onSave: () {
+            var e = EventosSalvos(
+                LoginController().idUsuario(),
+                'Festa de crianças',
+                'Evento lúdico, músicas e comidas típicas!');
+            EventosSalvosController().adicionar(context, e);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventosSalvosView()),
+            );
+          },
+        ),
+        _buildPublicacao(
+          nome: 'Festa do Arraia',
+          texto: 'Evento junino para toda a família',
+          local: "Jd Marchesi",
+          likes: 254,
+          comentarios: 48,
+          onSave: () {
+            var e = EventosSalvos(LoginController().idUsuario(),
+                'Festa do Arraia', 'Evento junino para toda a família');
+            EventosSalvosController().adicionar(context, e);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventosSalvosView()),
+            );
+          },
+        ),
+        _buildPublicacao(
+          nome: 'Festa do boi morto',
           texto: 'Evento cultural, músicas e comidas típicas!',
           local: "Av Peraboles",
           likes: 254,
           comentarios: 48,
           onSave: () {
-            // Lógica para salvar a publicação
-          },
-        ),
-        _buildPublicacao(
-          usuario: 'Festa São João',
-          texto: 'Evento cultural, músicas e comidas típicas!',
-          local: "Av Peraboles",
-          likes: 254,
-          comentarios: 48,
-          onSave: () {
-            // Lógica para salvar a publicação
-          },
-        ),
-        _buildPublicacao(
-          usuario: 'Festa São João',
-          texto: 'Evento cultural, músicas e comidas típicas!',
-          local: "Av Peraboles",
-          likes: 254,
-          comentarios: 48,
-          onSave: () {
-            // Lógica para salvar a publicação
+            var e = EventosSalvos(
+                LoginController().idUsuario(),
+                'Festa do boi morto',
+                'Evento cultural, músicas e comidas típicas!');
+            EventosSalvosController().adicionar(context, e);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventosSalvosView()),
+            );
           },
         ),
       ],
@@ -150,7 +189,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
   }
 
   Widget _buildPublicacao({
-    required String usuario,
+    required String nome,
     required String local,
     required String texto,
     required int likes,
@@ -168,7 +207,7 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            usuario,
+            nome,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -217,10 +256,10 @@ class _TelaPrincipalViewState extends State<TelaPrincipalView>
             icon: Icon(Icons.notifications),
             color: Colors.white,
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => EventosSalvosScreen()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EventosSalvosView()),
+              );
             },
           ),
           IconButton(

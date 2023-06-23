@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ievent/view/perfil.dart';
-import '../controller/evento_publico_controller.dart';
+import '../controller/evento_controller.dart';
 import '../controller/login_controller.dart';
 import '../model/evento.dart';
 import 'criar_evento.dart';
