@@ -4,7 +4,6 @@ import 'package:ievent/view/perfil.dart';
 import '../controller/evento_controller.dart';
 import '../controller/login_controller.dart';
 import '../model/evento.dart';
-import 'criar_evento.dart';
 import 'evento_salvo.dart';
 import 'maps.dart';
 
