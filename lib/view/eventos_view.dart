@@ -184,76 +184,80 @@ class _EventosViewState extends State<EventosView>
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Cadastro de eventos'),
-          ),
-          body: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: txtNome,
-                  decoration: InputDecoration(
-                    labelText: 'Nome',
+        return Theme(
+          data: ThemeData.dark(),
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text('Cadastro de eventos'),
+            ),
+            body: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: txtNome,
+                    decoration: InputDecoration(
+                      labelText: 'Nome',
+                    ),
                   ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: txtLocal,
-                  decoration: InputDecoration(
-                    labelText: 'Local',
+                  SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: txtLocal,
+                    decoration: InputDecoration(
+                      labelText: 'Local',
+                    ),
                   ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: txtDescricao,
-                  decoration: InputDecoration(
-                    labelText: 'Descrição',
+                  SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: txtDescricao,
+                    decoration: InputDecoration(
+                      labelText: 'Descrição',
+                    ),
                   ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: txtVisibilidade,
-                  decoration: InputDecoration(
-                    labelText: 'Visibilidade',
+                  SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: txtVisibilidade,
+                    decoration: InputDecoration(
+                      labelText: 'Visibilidade',
+                    ),
                   ),
-                ),
-                SizedBox(height: 32.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        var event = Eventos(
+                  SizedBox(height: 32.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          var event = Eventos(
                             LoginController().idUsuario(),
                             txtNome.text,
                             txtLocal.text,
                             txtDescricao.text,
-                            txtVisibilidade.text);
-                        txtNome.clear();
-                        txtDescricao.clear();
-                        txtLocal.clear();
-                        txtVisibilidade.clear();
-                        if (eventId == null) {
-                          EventosController().adicionar(context, event);
-                        } else {
-                          EventosController()
-                              .atualizar(context, eventId, event);
-                        }
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Salvar'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Fechar'),
-                    ),
-                  ],
-                ),
-              ],
+                            txtVisibilidade.text,
+                          );
+                          txtNome.clear();
+                          txtDescricao.clear();
+                          txtLocal.clear();
+                          txtVisibilidade.clear();
+                          if (eventId == null) {
+                            EventosController().adicionar(context, event);
+                          } else {
+                            EventosController()
+                                .atualizar(context, eventId, event);
+                          }
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Salvar'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Fechar'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
